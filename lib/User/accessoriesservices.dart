@@ -10,6 +10,9 @@ class Accessoriesservices extends StatefulWidget {
 }
 
 class _AccessoriesservicesState extends State<Accessoriesservices> {
+  double _rating = 0;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -672,6 +675,54 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                 padding: EdgeInsets.all(8.0),
                 child: Column(
                   children: [
+                    const Text(
+                      'Rating',
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.star, color: _rating >= 1 ? Colors.orange : Colors.grey),
+                          onPressed: () {
+                            setState(() {
+                              _rating = 1;
+                            });
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.star, color: _rating >= 2 ? Colors.orange : Colors.grey),
+                          onPressed: () {
+                            setState(() {
+                              _rating = 2;
+                            });
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.star, color: _rating >= 3 ? Colors.orange : Colors.grey),
+                          onPressed: () {
+                            setState(() {
+                              _rating = 3;
+                            });
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.star, color: _rating >= 4 ? Colors.orange : Colors.grey),
+                          onPressed: () {
+                            setState(() {
+                              _rating = 4;
+                            });
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.star, color: _rating >= 5 ? Colors.orange : Colors.grey),
+                          onPressed: () {
+                            setState(() {
+                              _rating = 5;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
                     const TextField(
                       decoration: InputDecoration(
                         labelText: "Enter your Feedback here ...........",

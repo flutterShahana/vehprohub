@@ -1,10 +1,11 @@
-import 'dart:developer';
+
 import 'package:autoprohub/User/editprofilepage.dart';
 import 'package:autoprohub/User/homepage.dart';
+import 'package:autoprohub/User/media.dart';
 import 'package:autoprohub/User/notificationpage.dart';
 import 'package:autoprohub/User/paymenthis.dart';
-import 'package:autoprohub/User/review.dart';
-import 'package:autoprohub/User/screen4media.dart';
+import 'package:autoprohub/User/rev_rat_feedbk_pg.dart';
+
 import 'package:autoprohub/User/screen5profile.dart';
 import 'package:autoprohub/User/servicefull.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _HamberState extends State<Hamber> {
     Homepage(),
     BookSts(),
     ServiceFull(),
-    Screenmedia(),
+    Medias(),
     Screenprofile(),
 
     // Text("Home",style: TextStyle(fontSize: 30),),
@@ -200,7 +201,7 @@ class _HamberState extends State<Hamber> {
               title: Text("Review"),
               onTap: () {
 
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const Review()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewRatingFeedbackPage()));
 
                 // Handle navigation to review page
               },
