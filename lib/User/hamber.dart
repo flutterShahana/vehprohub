@@ -1,16 +1,15 @@
 import 'dart:developer';
-
 import 'package:autoprohub/User/editprofilepage.dart';
-import 'package:autoprohub/User/history.dart';
 import 'package:autoprohub/User/homepage.dart';
 import 'package:autoprohub/User/notificationpage.dart';
 import 'package:autoprohub/User/paymenthis.dart';
 import 'package:autoprohub/User/review.dart';
-import 'package:autoprohub/User/screen2map.dart';
 import 'package:autoprohub/User/screen4media.dart';
 import 'package:autoprohub/User/screen5profile.dart';
 import 'package:autoprohub/User/servicefull.dart';
 import 'package:flutter/material.dart';
+
+import 'BOOKINGSTATUS/bookingsts.dart';
 
 class Hamber extends StatefulWidget {
   const Hamber({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class _HamberState extends State<Hamber> {
 
   List<Widget>widgetList = const [
     Homepage(),
-    Screen2map(),
+    BookSts(),
     ServiceFull(),
     Screenmedia(),
     Screenprofile(),
@@ -169,7 +168,7 @@ class _HamberState extends State<Hamber> {
               title: Text("History"),
               onTap: () {
 
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const History()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const BookSts()));
 
                 // Handle navigation to history page
               },
@@ -245,8 +244,8 @@ class _HamberState extends State<Hamber> {
           BottomNavigationBarItem(icon:const Icon(Icons.home,),
           label: "Home",backgroundColor: Colors.purpleAccent[100]),
 
-          const BottomNavigationBarItem(icon:Icon(Icons.location_on),
-              label: "Map"),
+          const BottomNavigationBarItem(icon:Icon(Icons.work_history_outlined),
+              label: "My Trip"),
 
           const BottomNavigationBarItem(icon:Icon(Icons.emoji_transportation),
               label: "Services"),

@@ -1,6 +1,6 @@
 import 'package:autoprohub/User/pictures.dart';
-import 'package:autoprohub/User/postss.dart';
-import 'package:autoprohub/User/videoos.dart';
+import 'package:autoprohub/User/MEDIA/postss.dart';
+import 'package:autoprohub/User/MEDIA/videoos.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,7 +15,7 @@ class _MediasState extends State<Medias> {
   @override
   Widget build(BuildContext context) {
     return  DefaultTabController(
-      length: 3,
+      length:3,
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Media"),
@@ -77,55 +77,55 @@ class _MediasState extends State<Medias> {
         //     )
         // ),
 
-        body:Padding(
-          padding: EdgeInsets.all(0.0),
-          child: Column(
-            children: [
+        body:Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
 
-              Container(
-                height: 45,
-                width: 300,
-                decoration: BoxDecoration(
-                  color: Colors.blue[300],
-                  // borderRadius: BorderRadius(),
-                ),
-                child:
-                TabBar(
-                  indicator: BoxDecoration(
-                    color: Colors.green[300],
-                    borderRadius: BorderRadius.circular(25.0),
+            Container(
+              // height: 45,
+              // width: 300,
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+                // borderRadius: BorderRadius(),
+              ),
+              child:
+              Row(
+                children: [
+                  TabBar(
+                    indicator: BoxDecoration(
+                      color: Colors.blue[200],
+                      // borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Colors.black,
+                    tabs: const [
+
+                      Tab(text: "   Photos   ",),
+                      Tab(text: "   Videos   ",),
+                      Tab(text: "   Posts    ",),
+                      // Tab(text: "Accessory",)
+
+                    ],
+                    isScrollable: true,
+
                   ),
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.black,
-                  tabs: const [
+                ],
+              ) ,
+            ),
+            const Expanded(
+              child:
+              TabBarView(
+                children: [
 
-                    Tab(text: "Photos",),
-                    Tab(text: "Videos",),
-                    Tab(text: "Posts",),
-                    // Tab(text: "Accessory",)
+                  Pictures(),
+                  Videoss(),
+                  Posts(),
 
-                  ],
-                  isScrollable: true,
-
-                ) ,
+                ],
               ),
-              const Expanded(
-                child:
-                TabBarView(
-                  children: [
-
-                    Pictures(),
-                    Videoss(),
-                    Posts(),
-                    // (),
-
-
-
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
 
 

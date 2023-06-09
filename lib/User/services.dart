@@ -26,56 +26,53 @@ class Services extends StatelessWidget {
 
 
         ),
-        body:Padding(
-          padding: EdgeInsets.all(0.0),
-          child: Column(
-            children: [
+        body:Column(
+          children: [
 
-              Container(
-                height: 45,
-                width: 300,
-                decoration: BoxDecoration(
-                  color: Colors.blue[300],
-                  // borderRadius: BorderRadius(),
+            Container(
+              height: 45,
+              width: 300,
+              decoration: BoxDecoration(
+                color: Colors.blue[300],
+                // borderRadius: BorderRadius(),
+              ),
+              child:
+              TabBar(
+                indicator: BoxDecoration(
+                  color: Colors.green[300],
+                  // borderRadius: BorderRadius.circular(25.0),
                 ),
-                child:
-                TabBar(
-                  indicator: BoxDecoration(
-                    color: Colors.green[300],
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.black,
-                  tabs: const [
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.black,
+                tabs: const [
 
-                    Tab(text: "Cab",),
-                    Tab(text: "Rent",),
-                    Tab(text: "Workshop",),
-                    Tab(text: "Accessory",)
+                  Tab(text: "Cab",),
+                  Tab(text: "Rent",),
+                  Tab(text: "Workshop",),
+                  Tab(text: "Accessory",)
+
+                ],
+                isScrollable: true,
+
+              ) ,
+            ),
+            const Expanded(
+                child:
+                TabBarView(
+                  children: [
+
+                    Cabservices(),
+                    Rentalservices(),
+                    WorkshopServices(),
+                    Accessoriesservices(),
+
+
 
                   ],
-                  isScrollable: true,
-
-                ) ,
-              ),
-              const Expanded(
-                  child:
-                  TabBarView(
-                    children: [
-
-                      Cabservices(),
-                      Rentalservices(),
-                      WorkshopServices(),
-                      Accessoriesservices(),
-
-
-
-                    ],
-                  ),
-              ),
-            ],
-          ),
-       ),
+                ),
+            ),
+          ],
+        ),
 
 
       ),

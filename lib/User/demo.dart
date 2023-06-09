@@ -19,18 +19,15 @@ class demo extends StatelessWidget {
             children: [
 
               Padding(padding: EdgeInsets.only(top:5.0),
-                child: Container(
 
+                child: Container(
                   height:35,
                   width: MediaQuery.of(context).size.width,
-
-
                   color: Colors.red,
                   child: Text("MARIO",
                     style:TextStyle(
                       fontSize: 30,
                       color: Colors.white,
-
                     ),
                   ),
 
