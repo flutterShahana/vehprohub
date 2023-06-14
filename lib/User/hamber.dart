@@ -56,7 +56,6 @@ class _HamberState extends State<Hamber> {
 
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationPage()));
 
-
               },
               icon:const Icon(Icons.notification_important_sharp)
           )

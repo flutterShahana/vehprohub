@@ -216,13 +216,13 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Recommended",
@@ -236,20 +236,19 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Add button action here
+                                  },
+                                  child: const Text('Show more'),
                                 ),
 
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -318,13 +317,13 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Brands",
@@ -337,19 +336,18 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Add button action here
+                                  },
+                                  child: const Text('Show more'),
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -415,13 +413,13 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Vehicles",
@@ -431,22 +429,25 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                                   ),
                                 ),
                               ],
+
+
+
+
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Add button action here
+                                  },
+                                  child: const Text('Show more'),
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -514,13 +515,13 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Trending",
@@ -533,19 +534,18 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: (){
+                                  },
+                                  child: const Text('Show more',
+                                  selectionColor: Colors.blueGrey,),
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -743,10 +743,6 @@ class _AccessoriesservicesState extends State<Accessoriesservices> {
               ),
 
               SizedBox(height: 15),
-
-
-
-
 
 
 

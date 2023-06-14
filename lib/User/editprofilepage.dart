@@ -10,7 +10,7 @@ class EditProfilePage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.save),
             onPressed: () {
-              // Add functionality to save the edited profile details
+
             },
           ),
         ],

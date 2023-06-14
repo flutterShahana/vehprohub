@@ -9,7 +9,10 @@ class Rentalservices extends StatefulWidget {
 }
 
 class _RentalservicesState extends State<Rentalservices> {
+  double _rating = 0;
+
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
 
@@ -20,16 +23,13 @@ class _RentalservicesState extends State<Rentalservices> {
         actions: [
           IconButton(
               onPressed: (){
-
                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationPage()));
-
-
               },
               icon:const Icon(Icons.filter_list_alt)
           )
         ],
-
       ),
+
       body: Container(
         height: double.infinity ,
         width: MediaQuery.of(context).size.width,
@@ -72,7 +72,6 @@ class _RentalservicesState extends State<Rentalservices> {
                         height: 150,
                         // width: 100,
                         decoration:  const BoxDecoration(
-
                             image: DecorationImage(image:AssetImage("images/cabtop.jpg"),
                               fit: BoxFit.fill,
 
@@ -217,7 +216,7 @@ class _RentalservicesState extends State<Rentalservices> {
                         padding: EdgeInsets.all(20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
                               children: [
@@ -243,10 +242,10 @@ class _RentalservicesState extends State<Rentalservices> {
 
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -320,7 +319,7 @@ class _RentalservicesState extends State<Rentalservices> {
                         padding: EdgeInsets.all(20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
                               children: [
@@ -344,10 +343,10 @@ class _RentalservicesState extends State<Rentalservices> {
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -445,10 +444,10 @@ class _RentalservicesState extends State<Rentalservices> {
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -537,6 +536,7 @@ class _RentalservicesState extends State<Rentalservices> {
                             ),
                             Column(
                               children: [
+
                                 Text(
                                   "show more",
                                   style: TextStyle(
@@ -546,10 +546,10 @@ class _RentalservicesState extends State<Rentalservices> {
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -678,6 +678,59 @@ class _RentalservicesState extends State<Rentalservices> {
 
               SizedBox(height: 12),
 
+    Padding(
+    padding: EdgeInsets.all(8.0),
+    child: Column(
+    children: [
+    const Text(
+    'Rating',
+    ),
+    Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 1 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 1;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 2 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 2;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 3 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 3;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 4 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 4;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 5 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 5;
+    });
+    },
+    ),
+    ],
+    ),
+
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Column(
@@ -700,13 +753,13 @@ class _RentalservicesState extends State<Rentalservices> {
                   ],
                 ),
               ),
-
-
             ],
           ),
         ),
+    ],
       ),
-
+    ),
+      ),
     );
   }
 }

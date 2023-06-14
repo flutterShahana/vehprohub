@@ -9,6 +9,8 @@ class WorkshopServices extends StatefulWidget {
 }
 
 class _WorkshopServicesState extends State<WorkshopServices> {
+  double _rating = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,10 +21,8 @@ class _WorkshopServicesState extends State<WorkshopServices> {
         actions: [
           IconButton(
               onPressed: (){
-
                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationPage()));
-
-
+                
               },
               icon:const Icon(Icons.filter_list_alt)
           )
@@ -35,7 +35,7 @@ class _WorkshopServicesState extends State<WorkshopServices> {
 
         child:SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
 
             children: [
@@ -215,7 +215,7 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                       const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
@@ -242,10 +242,10 @@ class _WorkshopServicesState extends State<WorkshopServices> {
 
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -318,7 +318,7 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                       const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
@@ -343,10 +343,10 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -419,7 +419,7 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                       const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Column(
@@ -444,10 +444,10 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                 ),
                               ],
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 18,
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
                           ],
                         ),
                       ),
@@ -520,7 +520,7 @@ class _WorkshopServicesState extends State<WorkshopServices> {
               //         const Padding(
               //           padding: EdgeInsets.all(20.0),
               //           child: Row(
-              //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //             crossAxisAlignment: CrossAxisAlignment.start,
               //             children: [
               //               Column(
@@ -628,12 +628,11 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 20,
-                              weight:20,
-
-                            ),
+                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 20,
+                            //   weight:20,
+                            // ),
                           ],
 
 
@@ -677,6 +676,59 @@ class _WorkshopServicesState extends State<WorkshopServices> {
 
               SizedBox(height: 12),
 
+    Padding(
+    padding: EdgeInsets.all(8.0),
+    child: Column(
+    children: [
+    const Text(
+    'Rating',
+    ),
+    Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 1 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 1;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 2 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 2;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 3 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 3;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 4 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 4;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 5 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 5;
+    });
+    },
+    ),
+    ],
+    ),
+
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Column(
@@ -705,6 +757,9 @@ class _WorkshopServicesState extends State<WorkshopServices> {
 
             ],
           ),
+    ),
+    ],
+    ),
         ),
       ),
 

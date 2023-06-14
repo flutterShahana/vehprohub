@@ -1,5 +1,10 @@
+import 'package:autoprohub/User/SHOWMORE/CABSHOWMORE/cab_Traveler_showmmore.dart';
+import 'package:autoprohub/User/SHOWMORE/CABSHOWMORE/cab_auto_showmore.dart';
+import 'package:autoprohub/User/SHOWMORE/CABSHOWMORE/cab_goodscarrier_show%20more.dart';
 import 'package:flutter/material.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
+
+import 'SHOWMORE/CABSHOWMORE/cab_car_showmore.dart';
 class Cabservices extends StatefulWidget {
   const Cabservices({Key? key}) : super(key: key);
 
@@ -8,6 +13,8 @@ class Cabservices extends StatefulWidget {
 }
 
 class _CabservicesState extends State<Cabservices> {
+  double _rating = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +26,7 @@ class _CabservicesState extends State<Cabservices> {
           IconButton(
               onPressed: (){
 
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationPage()));
+                // Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabCarShowmore()));
 
 
               },
@@ -211,13 +218,13 @@ class _CabservicesState extends State<Cabservices> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                         Padding(
                           padding: EdgeInsets.all(20.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
+                              const Column(
                                 children: [
                                   Text(
                                     "Car",
@@ -231,20 +238,19 @@ class _CabservicesState extends State<Cabservices> {
                               ),
                               Column(
                                 children: [
-                                  Text(
-                                    "show more",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabCarShowmore()));
+                                    },
+                                    child: const Text('Show more'),
                                   ),
 
                                 ],
                               ),
-                              Icon(
-                                Icons.arrow_forward,
-                                size: 18,
-                              ),
+                              // Icon(
+                              //   Icons.arrow_forward,
+                              //   size: 18,
+                              // ),
                             ],
                           ),
                         ),
@@ -314,13 +320,13 @@ class _CabservicesState extends State<Cabservices> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                         Padding(
                           padding: EdgeInsets.all(20.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
+                              const Column(
                                 children: [
                                   Text(
                                     "AutoRiksha",
@@ -333,19 +339,18 @@ class _CabservicesState extends State<Cabservices> {
                               ),
                               Column(
                                 children: [
-                                  Text(
-                                    "show more",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabAutoShowmore()));
+                                    },
+                                    child: const Text('Show more'),
                                   ),
                                 ],
                               ),
-                              Icon(
-                                Icons.arrow_forward,
-                                size: 18,
-                              ),
+                              // Icon(
+                              //   Icons.arrow_forward,
+                              //   size: 18,
+                              // ),
                             ],
                           ),
                         ),
@@ -415,13 +420,13 @@ class _CabservicesState extends State<Cabservices> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                         Padding(
                           padding: EdgeInsets.all(20.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
+                              const Column(
                                 children: [
                                   Text(
                                     "Goods Carrier",
@@ -434,19 +439,18 @@ class _CabservicesState extends State<Cabservices> {
                               ),
                               Column(
                                 children: [
-                                  Text(
-                                    "show more",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabGoodscarrierShowmore()));
+                                    },
+                                    child: const Text('Show more'),
                                   ),
                                 ],
                               ),
-                              Icon(
-                                Icons.arrow_forward,
-                                size: 18,
-                              ),
+                              // Icon(
+                              //   Icons.arrow_forward,
+                              //   size: 18,
+                              // ),
                             ],
                           ),
                         ),
@@ -516,13 +520,13 @@ class _CabservicesState extends State<Cabservices> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                         Padding(
                           padding: EdgeInsets.all(20.0),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
+                              const Column(
                                 children: [
                                   Text(
                                     "Traveler",
@@ -530,24 +534,25 @@ class _CabservicesState extends State<Cabservices> {
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                     ),
+
+
                                   ),
                                 ],
                               ),
                               Column(
                                 children: [
-                                  Text(
-                                    "show more",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabTravellerShowmore()));
+                                    },
+                                    child: const Text('Show more'),
                                   ),
                                 ],
                               ),
-                              Icon(
-                                Icons.arrow_forward,
-                                size: 18,
-                              ),
+                              // Icon(
+                              //   Icons.arrow_forward,
+                              //   size: 18,
+                              // ),
                             ],
                           ),
                         ),
@@ -676,6 +681,61 @@ class _CabservicesState extends State<Cabservices> {
 
                 SizedBox(height: 12),
 
+
+
+    Padding(
+    padding: EdgeInsets.all(8.0),
+    child: Column(
+    children: [
+    const Text(
+    'Rating',
+    ),
+    Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 1 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 1;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 2 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 2;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 3 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 3;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 4 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 4;
+    });
+    },
+    ),
+    IconButton(
+    icon: Icon(Icons.star, color: _rating >= 5 ? Colors.orange : Colors.grey),
+    onPressed: () {
+    setState(() {
+    _rating = 5;
+    });
+    },
+    ),
+    ],
+    ),
+
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Column(
@@ -702,14 +762,12 @@ class _CabservicesState extends State<Cabservices> {
                 SizedBox(height: 15),
 
 
-
-
-
-
-
               ],
             ),
           ),
+    ],
+          ),
+      ),
       ),
     );
   }
