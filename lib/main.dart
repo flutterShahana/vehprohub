@@ -1,7 +1,5 @@
+import 'package:autoprohub/User/hamber.dart';
 import 'package:flutter/material.dart';
-import 'FIRSTLOG/logusrspin.dart';
-import 'User/ProviderAPH/provider_drawer_pg_nav.dart';
-
 
 void main(){
   print("hello..nj");
@@ -15,7 +13,7 @@ class myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ProvderDrawerPg(),
+      home: Hamber(),
 
       // home: ReviewRatingFeedbackPage(),
 

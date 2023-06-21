@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 
+import 'SHOWMORE/rental_showmore.dart';
+
 class Rentalservices extends StatefulWidget {
   const Rentalservices({Key? key}) : super(key: key);
 
@@ -212,13 +214,13 @@ class _RentalservicesState extends State<Rentalservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Car",
@@ -232,14 +234,12 @@ class _RentalservicesState extends State<Rentalservices> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const Rentalshowmore()));
+                                  },
+                                  child: const Text('Show more'),
                                 ),
-
                               ],
                             ),
                             // Icon(
@@ -315,13 +315,13 @@ class _RentalservicesState extends State<Rentalservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           // crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Bike",
@@ -334,12 +334,11 @@ class _RentalservicesState extends State<Rentalservices> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabTravellerShowmore()));
+                                  },
+                                  child: const Text('Show more'),
                                 ),
                               ],
                             ),
@@ -416,13 +415,13 @@ class _RentalservicesState extends State<Rentalservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Luxury Car",
@@ -435,12 +434,11 @@ class _RentalservicesState extends State<Rentalservices> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabTravellerShowmore()));
+                                  },
+                                  child: const Text('Show more'),
                                 ),
                               ],
                             ),
@@ -517,13 +515,13 @@ class _RentalservicesState extends State<Rentalservices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Luxury Bike",
@@ -536,13 +534,11 @@ class _RentalservicesState extends State<Rentalservices> {
                             ),
                             Column(
                               children: [
-
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabTravellerShowmore()));
+                                  },
+                                  child: const Text('Show more'),
                                 ),
                               ],
                             ),

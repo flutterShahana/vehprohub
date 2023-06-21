@@ -212,13 +212,13 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
+                            const Column(
                               children: [
                                 Text(
                                   "Car",
@@ -232,114 +232,11 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                            // Icon(
-                            //   Icons.arrow_forward,
-                            //   size: 18,
-                            // ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 180,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(),
-                              child: Card(
-                                elevation: 10,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 140,
-
-                                      color: Colors.yellow[200],
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: const Row(
-                                        children: [
-                                          Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text("CAR ONE"),
-                                              SizedBox(height: 3),
-                                              Text("Detail 1"),
-                                              SizedBox(height: 3),
-                                              Text("Detail 2"),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(width: 5),
-                                    Container(
-                                      height: 89,
-                                      width: 140,
-                                      decoration: const BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage("images/img2.png"),
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 10),
-
-
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
-                child: Card(
-                  color: Colors.cyan,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(
-                              children: [
-                                Text(
-                                  "AutoRiksha",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabTravellerShowmore()));
+                                  },
+                                  child: const Text('Show more'),
                                 ),
                               ],
                             ),
@@ -416,13 +313,112 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            const Column(
+                              children: [
+                                Text(
+                                  "Bike",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                             Column(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabTravellerShowmore()));
+                                  },
+                                  child: const Text('Show more'),
+                                ),
+                              ],
+                            ),                            // Icon(
+                            //   Icons.arrow_forward,
+                            //   size: 18,
+                            // ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 180,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(),
+                              child: Card(
+                                elevation: 10,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 140,
+
+                                      color: Colors.yellow[200],
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: const Row(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text("BIKE ONE"),
+                                              SizedBox(height: 3),
+                                              Text("Detail 1"),
+                                              SizedBox(height: 3),
+                                              Text("Detail 2"),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Container(
+                                      height: 89,
+                                      width: 140,
+                                      decoration: const BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage("images/img2.png"),
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
+                child: Card(
+                  color: Colors.cyan,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                       Padding(
+                        padding: EdgeInsets.all(20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Column(
                               children: [
                                 Text(
                                   "Heavy Vehicles",
@@ -435,16 +431,14 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                             ),
                             Column(
                               children: [
-                                Text(
-                                  "show more",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>const CabTravellerShowmore()));
+                                  },
+                                  child: const Text('Show more'),
                                 ),
                               ],
-                            ),
-                            // Icon(
+                            ),                            // Icon(
                             //   Icons.arrow_forward,
                             //   size: 18,
                             // ),

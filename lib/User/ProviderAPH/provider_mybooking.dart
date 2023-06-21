@@ -14,8 +14,6 @@ class _ProviderMybookingState extends State<ProviderMybooking> {
     'assets/images/image3.png',
   ];
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
