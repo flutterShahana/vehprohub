@@ -18,7 +18,6 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
   List<Widget>widgetList = const [
     HomeProvider(),
     ProviderMybooking(),
-
     ProviderAdofferView()
     ,Medias(),
   Screenprofile(),

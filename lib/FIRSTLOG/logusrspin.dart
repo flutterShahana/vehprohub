@@ -72,7 +72,10 @@
 //   }
 // }
 import 'package:autoprohub/FIRSTLOG/servicestypees.dart';
+import 'package:autoprohub/User/hamber.dart';
 import 'package:flutter/material.dart';
+
+import '../User/ProviderAPH/provider_drawer_pg_nav.dart';
 
 class UserServiceProvider extends StatefulWidget {
   const UserServiceProvider({Key? key}) : super(key: key);
@@ -107,7 +110,7 @@ class _UserServiceProviderState extends State<UserServiceProvider> {
                   height: 80.0,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const Hamber() ));
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -128,7 +131,7 @@ class _UserServiceProviderState extends State<UserServiceProvider> {
                   height: 80.0,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const ServicesFullTypes()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProvderDrawerPg()));
                     },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,

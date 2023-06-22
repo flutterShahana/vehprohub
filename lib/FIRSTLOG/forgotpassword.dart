@@ -140,6 +140,7 @@
 //   }
 // }
 
+import 'package:autoprohub/FIRSTLOG/otp_page.dart';
 import 'package:flutter/material.dart';
 
 class Pass_Forgot extends StatefulWidget {
@@ -212,7 +213,7 @@ class _Pass_ForgotState extends State<Pass_Forgot> {
                     width: 200.0,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>OTPPage()));
                       },
                       child: const Text(
                         'Login',
