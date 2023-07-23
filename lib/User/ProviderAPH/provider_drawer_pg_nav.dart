@@ -1,5 +1,5 @@
 import 'package:autoprohub/User/ProviderAPH/pro_adoffer_view.dart';
-import 'package:autoprohub/User/ProviderAPH/provider_home.dart';
+import 'package:autoprohub/PROVIDER/provider_home.dart';
 import 'package:autoprohub/User/ProviderAPH/provider_mybooking.dart';
 import 'package:flutter/material.dart';
 import '../media.dart';

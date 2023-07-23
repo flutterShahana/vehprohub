@@ -1,7 +1,7 @@
 import 'package:autoprohub/User/BOOKINGSTATUS/bookingsts_workshop.dart';
-import 'package:autoprohub/User/BOOKINGSTATUS/booksts_accessories.dart';
-import 'package:autoprohub/User/BOOKINGSTATUS/booksts_rentalveh.dart';
-import 'package:autoprohub/User/BOOKINGSTATUS/booksts_cab.dart';
+import 'package:autoprohub/User/AccBookingStatus/booksts_accessories.dart';
+import 'package:autoprohub/User/RentalBookingStatus/booksts_rentalveh.dart';
+import 'package:autoprohub/User/CabBookingStatus/booksts_cab.dart';
 import 'package:flutter/material.dart';
 
 class BookSts extends StatefulWidget {
@@ -15,11 +15,9 @@ class _BookStsState extends State<BookSts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: const Text("Booking Status"),
       ),
-
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -42,9 +40,29 @@ class _BookStsState extends State<BookSts> {
                         builder: (BuildContext context) => const BookStsCab(),
                       );
                     },
-                    child: const Text('Cab Vehicle Booking',style: TextStyle(
-                      fontSize: 18,
+                    child: const Text(
+                      'Cab Vehicle Booking',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
+                  ),
+                ),
+                SizedBox(
+                  height: 80.0,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) =>
+                            const BookStatusRental(),
+                      );
+                    },
+                    child: const Text(
+                      'Rental Vehicle Booking',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),
@@ -52,32 +70,18 @@ class _BookStsState extends State<BookSts> {
                   height: 80.0,
                   child: ElevatedButton(
                     onPressed: () {
-
                       showModalBottomSheet(
                         context: context,
-                        builder: (BuildContext context) => const BookStatusRental(),
+                        builder: (BuildContext context) =>
+                            const BookStatusAccesories(),
                       );
-
                     },
-                    child: const Text('Rental Vehicle Booking',style: TextStyle(
-                      fontSize: 18,
-                    ),),
-                  ),
-                ),
-                SizedBox(
-                  height: 80.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) => const BookStatusAccesories(),
-                      );
-
-                    },
-                    child: const Text('Accessories Booking',style: TextStyle(
-                      fontSize: 18,
-                    ),),
+                    child: const Text(
+                      'Accessories Booking',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -86,13 +90,16 @@ class _BookStsState extends State<BookSts> {
                     onPressed: () {
                       showModalBottomSheet(
                         context: context,
-                        builder: (BuildContext context) => const BookStatusWorkshop(),
+                        builder: (BuildContext context) =>
+                            const BookStatusWorkshop(),
                       );
-
                     },
-                    child: const Text('Workshop Booking',style: TextStyle(
-                      fontSize: 18,
-                    ),),
+                    child: const Text(
+                      'Workshop Booking',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ),
               ],

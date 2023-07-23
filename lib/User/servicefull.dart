@@ -1,11 +1,13 @@
+import 'package:autoprohub/User/Services/Accessory/accessoriesService.dart';
 import 'package:autoprohub/User/accessoriesservices.dart';
-import 'package:autoprohub/User/cabservices.dart';
+import 'package:autoprohub/User/Services/Cab/cabServices.dart';
 import 'package:autoprohub/User/filterpage.dart';
 import 'package:autoprohub/User/rentalservices.dart';
 import 'package:autoprohub/User/review.dart';
-import 'package:autoprohub/User/workshopservices.dart';
 import 'package:flutter/material.dart';
 
+import 'Services/Rent/rentalService.dart';
+import 'Services/Workshop/workshipService.dart';
 
 class ServiceFull extends StatefulWidget {
   const ServiceFull({Key? key}) : super(key: key);
@@ -42,7 +44,8 @@ class _ServiceFullState extends State<ServiceFull> {
             children: [
               const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
+                padding: const EdgeInsets.only(
+                    left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -83,12 +86,14 @@ class _ServiceFullState extends State<ServiceFull> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
+                padding: const EdgeInsets.only(
+                    left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Rentalservices()),
+                      MaterialPageRoute(
+                          builder: (context) => const RentalServices()),
                     );
                   },
                   child: Card(
@@ -124,12 +129,14 @@ class _ServiceFullState extends State<ServiceFull> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
+                padding: const EdgeInsets.only(
+                    left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const WorkshopServices()),
+                      MaterialPageRoute(
+                          builder: (context) => const WorkshopServices()),
                     );
                   },
                   child: Card(
@@ -165,12 +172,14 @@ class _ServiceFullState extends State<ServiceFull> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
+                padding: const EdgeInsets.only(
+                    left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Accessoriesservices()),
+                      MaterialPageRoute(
+                          builder: (context) => const AccessoriesServices()),
                     );
                   },
                   child: Card(
@@ -206,7 +215,8 @@ class _ServiceFullState extends State<ServiceFull> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
+                padding: const EdgeInsets.only(
+                    left: 10.0, top: 5.0, right: 10.0, bottom: 5.0),
                 child: Card(
                   // color: Colors.cyan,
                   child: Column(
@@ -226,15 +236,10 @@ class _ServiceFullState extends State<ServiceFull> {
                             Icon(
                               Icons.arrow_forward,
                               size: 20,
-                                weight:20,
-
+                              weight: 20,
                             ),
                           ],
-
-
                         ),
-
-
                       ),
                       SizedBox(
                         height: 180,
@@ -279,31 +284,27 @@ class _ServiceFullState extends State<ServiceFull> {
                       decoration: InputDecoration(
                         labelText: "Enter your Feedback here ...........",
                         border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 16.0),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 30.0, horizontal: 16.0),
                       ),
                     ),
                     const SizedBox(height: 9.0),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const Review()));
-
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Review()));
                       },
                       child: const Text("   Add Your Feedback   "),
                     ),
                   ],
                 ),
               ),
-
-
             ],
           ),
         ),
       ),
-
-
-
-
-
     );
   }
 }

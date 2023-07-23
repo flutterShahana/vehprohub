@@ -1,3 +1,4 @@
+import 'package:autoprohub/PROVIDER/Services/Accessories/accesories.dart';
 import 'package:flutter/material.dart';
 
 class ServicesFullTypes extends StatelessWidget {
@@ -59,7 +60,7 @@ class ServicesFullTypes extends StatelessWidget {
                   height: 80.0,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
+                       //Navigator.push(context, MaterialPageRoute(builder: (context)=>const Accessories()));
 
 
                     },
