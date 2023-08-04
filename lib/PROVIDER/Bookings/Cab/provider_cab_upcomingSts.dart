@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
 //ProviderCabUpcomingSts
 class ProviderCabUpcomingSts extends StatefulWidget {
@@ -21,7 +22,8 @@ class _ProviderCabUpcomingStsState extends State<ProviderCabUpcomingSts> {
   var booikingId;
   var reply;
   Future<dynamic> getData() async {
-    var data = {'pro_id': '1', 'req_status': 'accepted'};
+    var data = {'pro_id': lid.toString(), 'req_status': 'accepted'};
+    print(data);
     var response =
         await post(Uri.parse('${Con.url}viewCabBookings.php'), body: data);
     print(response.body);
@@ -39,14 +41,39 @@ class _ProviderCabUpcomingStsState extends State<ProviderCabUpcomingSts> {
         await post(Uri.parse("${Con.url}updateCabRequest.php"), body: data);
     print(response.body);
     jsonDecode(response.body)['result'] == 'success'
+        ? {
+            setState(() {}),
+            Navigator.pop(context),
+          }
+        : Navigator.pop(context);
+
+    return json.decode(response.body);
+  }
+
+  var hr;
+  var total_hour = TextEditingController();
+  Future MarkHours() async {
+    var data = {'booikingId': booikingId.toString(), 'hr': total_hour.text};
+    print(data);
+    var response = await post(Uri.parse("${Con.url}markHours.php"), body: data);
+    print(response.body);
+    jsonDecode(response.body)['result'] == 'success'
         ? setState(() {})
         : Navigator.pop(context);
 
     return json.decode(response.body);
   }
 
+  var lid;
   @override
   void initState() {
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print(lid);
+      });
+    });
     getData();
   }
 
@@ -73,9 +100,10 @@ class _ProviderCabUpcomingStsState extends State<ProviderCabUpcomingSts> {
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['book_id']}',
+                            'Booking ID :# ${snapshot.data[index]['book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(
@@ -102,28 +130,108 @@ class _ProviderCabUpcomingStsState extends State<ProviderCabUpcomingSts> {
                                 'Time: ${snapshot.data[index]['bookingTime']}',
                                 style: tileText,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: OutlinedButton(
-                                        onPressed: () {
-                                          booikingId =
-                                              snapshot.data[index]['book_id'];
-                                          print('Booking Id:$booikingId');
-                                          print(
-                                              'cab ID: ${snapshot.data[index]['cab_id'].toString()}');
+                              Divider(),
+                              Text(
+                                'Payment Status: ${snapshot.data[index]['pay_status']}',
+                                style: tileText,
+                              ),
+                              Visibility(
+                                visible:
+                                    int.parse(snapshot.data[index]['tot_hr']) ==
+                                            '0'
+                                        ? true
+                                        : false,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: OutlinedButton(
+                                          onPressed: () {
+                                            booikingId =
+                                                snapshot.data[index]['book_id'];
+                                            print('Booking Id:$booikingId');
+                                            print(
+                                                'cab ID: ${snapshot.data[index]['cab_id'].toString()}');
 
-                                          reply = 'completed';
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                        'Mark total time to reach destination'),
+                                                    content: TextFormField(
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      controller: total_hour,
+                                                      decoration: InputDecoration(
+                                                          suffixIcon: Icon(Icons
+                                                              .access_time),
+                                                          hintText:
+                                                              ' (in hrs)'),
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            if (int.parse(
+                                                                    total_hour
+                                                                        .text) >
+                                                                0) {
+                                                              setState(() {
+                                                                MarkHours();
+                                                              });
+                                                            } else {
+                                                              ScaffoldMessenger
+                                                                      .of(
+                                                                          context)
+                                                                  .showSnackBar(
+                                                                      SnackBar(
+                                                                          content:
+                                                                              Text('Fill ithe fields')));
+                                                            }
+                                                          },
+                                                          child: Text('Mark'))
+                                                    ],
+                                                  );
+                                                });
 
-                                          setState(() {
-                                            updateRequest();
-                                          });
-                                        },
-                                        child: Text('Mark completed')),
-                                  ),
-                                ],
+                                            setState(() {
+                                              MarkHours();
+                                            });
+                                          },
+                                          child: Text('Mark Total Hours')),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Visibility(
+                                visible:
+                                    snapshot.data[index]['pay_status'] == 'paid'
+                                        ? true
+                                        : false,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: OutlinedButton(
+                                          onPressed: () {
+                                            booikingId =
+                                                snapshot.data[index]['book_id'];
+                                            print('Booking Id:$booikingId');
+                                            print(
+                                                'cab ID: ${snapshot.data[index]['cab_id'].toString()}');
+
+                                            reply = 'completed';
+
+                                            setState(() {
+                                              updateRequest();
+                                            });
+                                          },
+                                          child: Text('Mark completed')),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

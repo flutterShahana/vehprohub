@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
 class ProviderCabRequestSts extends StatefulWidget {
   const ProviderCabRequestSts({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class _ProviderCabRequestStsState extends State<ProviderCabRequestSts> {
   var booikingId;
   var reply;
   Future<dynamic> getData() async {
-    var data = {'pro_id': '1', 'req_status': 'requested'};
+    var data = {'pro_id': lid.toString(), 'req_status': 'requested'};
     var response =
         await post(Uri.parse('${Con.url}viewCabBookings.php'), body: data);
     print(response.body);
@@ -44,8 +45,16 @@ class _ProviderCabRequestStsState extends State<ProviderCabRequestSts> {
     return json.decode(response.body);
   }
 
+  var lid;
   @override
   void initState() {
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print(lid);
+      });
+    });
     getData();
   }
 
@@ -72,9 +81,10 @@ class _ProviderCabRequestStsState extends State<ProviderCabRequestSts> {
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['book_id']}',
+                            'Booking ID : # ${snapshot.data[index]['book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(

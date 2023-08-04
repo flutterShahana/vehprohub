@@ -136,9 +136,9 @@
 //   }
 // }
 
-import 'package:autoprohub/User/pictures.dart';
 import 'package:autoprohub/User/MEDIA/postss.dart';
 import 'package:autoprohub/User/MEDIA/videoos.dart';
+import 'package:autoprohub/User/pictures.dart';
 import 'package:flutter/material.dart';
 
 class Medias extends StatefulWidget {
@@ -169,7 +169,6 @@ class _MediasState extends State<Medias> {
                   // Handle post option
                 }
               },
-
               itemBuilder: (BuildContext context) => [
                 const PopupMenuItem<String>(
                   child: ListTile(
@@ -177,9 +176,6 @@ class _MediasState extends State<Medias> {
                     title: Text('Upload'),
                   ),
                 ),
-
-
-
                 const PopupMenuItem<String>(
                   value: 'photo',
                   child: ListTile(
@@ -205,8 +201,6 @@ class _MediasState extends State<Medias> {
             ),
           ],
         ),
-
-
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -244,4 +238,3 @@ class _MediasState extends State<Medias> {
     );
   }
 }
-

@@ -11,8 +11,13 @@ class Accessories extends StatefulWidget {
 }
 
 class _AccessoriesState extends State<Accessories> {
-  void nav(String type){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewAccessories(type: type,)));
+  void nav(String type) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ViewAccessories(
+                  type: type,
+                )));
   }
 
   @override
@@ -28,49 +33,55 @@ class _AccessoriesState extends State<Accessories> {
         child: Center(
           child: IntrinsicWidth(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  height: 30.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      nav('Car');
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Change the button color here
-                    ),
-                    child: const Text(
-                      'Car',
-                      style: TextStyle(
-                        fontSize: 18,
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: SizedBox(
+                    height: 80.0,
+                    width: 150,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        nav('Car');
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepOrange
+                            .withOpacity(0.3), // Change the button color here
+                      ),
+                      child: const Text(
+                        'Car',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      nav('Bike');
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: SizedBox(
+                    height: 80.0,
+                    width: 150,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        nav('Bike');
 
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                    ),
-                    child: const Text(
-                      'Bike',
-                      style: TextStyle(
-                        fontSize: 18,
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green.withOpacity(0.3),
+                      ),
+                      child: const Text(
+                        'Bike',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
-
               ],
             ),
           ),

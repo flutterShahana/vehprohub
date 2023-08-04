@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:autoprohub/User/Ratings/viewRating.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -76,9 +77,11 @@ class _AddRatingsState extends State<AddRatings> {
     if (flag == 1) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Rating added Successfully..')));
-      Navigator.pop(context);
-      // Navigator.pushReplacement(
-      //     context, MaterialPageRoute(builder: (context) => ViewRatings()));
+      // Navigator.pop(context);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ViewRatings(service_type: widget.service)));
     } else {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Failed to rate...')));

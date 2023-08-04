@@ -1,8 +1,9 @@
-import 'package:autoprohub/User/BOOKINGSTATUS/bookingsts_workshop.dart';
 import 'package:autoprohub/User/AccBookingStatus/booksts_accessories.dart';
 import 'package:autoprohub/User/RentalBookingStatus/booksts_rentalveh.dart';
 import 'package:autoprohub/User/CabBookingStatus/booksts_cab.dart';
 import 'package:flutter/material.dart';
+
+import '../WorkshopBookingStatus/bookSts_workshop.dart';
 
 class BookSts extends StatefulWidget {
   const BookSts({Key? key}) : super(key: key);

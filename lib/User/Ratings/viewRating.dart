@@ -85,15 +85,15 @@ class _ViewRatingsState extends State<ViewRatings> {
                             child: Card(
                               elevation: 20,
                               child: Container(
-                                height:
-                                    ((snapshot.data[index]['feedback'].length) >
+                                height: ((snapshot
+                                            .data[index]['feedback'].length) >=
+                                        20)
+                                    ? 200
+                                    : ((snapshot.data[index]['feedback']
+                                                .length) >=
                                             30)
-                                        ? 160
-                                        : ((snapshot.data[index]['feedback']
-                                                    .length) >
-                                                20)
-                                            ? 130
-                                            : 120,
+                                        ? 220
+                                        : 180,
                                 child: Column(
                                   children: [
                                     SizedBox(
@@ -122,10 +122,6 @@ class _ViewRatingsState extends State<ViewRatings> {
                                                         color: Colors.yellow)
                                             ],
                                           ),
-                                          Text(
-                                            '${snapshot.data[index]['feedback']}',
-                                            style: TextStyle(fontSize: 17),
-                                          ),
                                         ],
                                       ),
                                       trailing: Text(
@@ -133,9 +129,13 @@ class _ViewRatingsState extends State<ViewRatings> {
                                         style: TextStyle(fontSize: 17),
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
+                                    ListTile(
+                                      leading: SizedBox(),
+                                      title: Text(
+                                        '${snapshot.data[index]['feedback']}',
+                                        style: TextStyle(fontSize: 17),
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),

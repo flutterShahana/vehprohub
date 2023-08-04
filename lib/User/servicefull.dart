@@ -7,7 +7,7 @@ import 'package:autoprohub/User/review.dart';
 import 'package:flutter/material.dart';
 
 import 'Services/Rent/rentalService.dart';
-import 'Services/Workshop/workshipService.dart';
+import 'Services/Workshop/workshopService.dart';
 
 class ServiceFull extends StatefulWidget {
   const ServiceFull({Key? key}) : super(key: key);

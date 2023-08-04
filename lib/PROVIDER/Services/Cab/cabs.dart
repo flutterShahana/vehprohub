@@ -11,9 +11,15 @@ class Cabs extends StatefulWidget {
 
 class _CabsState extends State<Cabs> {
   // List cabList=['Car','Auto','Goods','Traveller'];
-void nav(String type){
-  Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewCabs(type: type,)));
-}
+  void nav(String type) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ViewCabs(
+                  type: type,
+                )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,15 +39,15 @@ void nav(String type){
                 Padding(
                   padding: const EdgeInsets.all(25.0),
                   child: SizedBox(
-                    height: 50.0,
+                    height: 80.0,
                     child: ElevatedButton(
                       onPressed: () {
                         nav('Car');
                         // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue, // Change the button color here
+                        backgroundColor: Colors.blue
+                            .withOpacity(0.3), // Change the button color here
                       ),
                       child: const Text(
                         'Car',
@@ -55,16 +61,15 @@ void nav(String type){
                 Padding(
                   padding: const EdgeInsets.all(25.0),
                   child: SizedBox(
-                    height: 50.0,
+                    height: 80.0,
                     child: ElevatedButton(
                       onPressed: () {
                         nav('Auto');
 
                         // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Colors.green.withOpacity(0.3),
                       ),
                       child: const Text(
                         'Auto',
@@ -78,17 +83,15 @@ void nav(String type){
                 Padding(
                   padding: const EdgeInsets.all(25.0),
                   child: SizedBox(
-                    height: 50.0,
+                    height: 80.0,
                     child: ElevatedButton(
                       onPressed: () {
                         nav('Goods');
 
                         // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
-
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
+                        backgroundColor: Colors.orange.withOpacity(0.3),
                       ),
                       child: const Text(
                         'Goods',
@@ -102,17 +105,16 @@ void nav(String type){
                 Padding(
                   padding: const EdgeInsets.all(25.0),
                   child: SizedBox(
-                    height: 50.0,
+                    height: 80.0,
                     width: 150,
                     child: ElevatedButton(
                       onPressed: () {
                         nav('Traveller');
 
                         // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.red.withOpacity(0.3),
                       ),
                       child: const Text(
                         'Traveller',

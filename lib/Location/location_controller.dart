@@ -1,6 +1,7 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+
 class LocationController extends GetxController {
   late Position? currentPosition;
   var isLoading = false.obs;
@@ -8,8 +9,9 @@ class LocationController extends GetxController {
   String? currentLocation;
   var myLat;
   var myLong;
+  var locality;
   Future<Position> getPosition() async {
-    LocationPermission?permission;
+    LocationPermission? permission;
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       //do stuff here
@@ -31,11 +33,11 @@ class LocationController extends GetxController {
       List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
       Placemark place = placemark[0];
       currentLocation =
-      "${place.locality},${place.street},${place.subLocality},${place
-          .subAdministrativeArea}";
+          "${place.locality},${place.street},${place.subLocality},${place.subAdministrativeArea}";
 
-      myLat=lat;
-      myLong=long;
+      myLat = lat;
+      myLong = long;
+      locality = place.locality;
       update();
     } catch (e) {
       print(e);
@@ -47,7 +49,8 @@ class LocationController extends GetxController {
       isLoading(true);
       update();
       currentPosition = await getPosition();
-      getAddressFromLatLng(currentPosition!.longitude, currentPosition!.latitude);
+      getAddressFromLatLng(
+          currentPosition!.longitude, currentPosition!.latitude);
       isLoading(false);
       update();
     } catch (e) {

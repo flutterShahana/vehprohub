@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
 class ProviderCabCompletedSts extends StatefulWidget {
   const ProviderCabCompletedSts({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _ProviderCabCompletedStsState extends State<ProviderCabCompletedSts> {
   var flag = 0;
   var status;
   Future<dynamic> getData() async {
-    var data = {'pro_id': '1', 'req_status': 'completed'};
+    var data = {'pro_id': lid.toString(), 'req_status': 'completed'};
     var response =
         await post(Uri.parse('${Con.url}viewCabBookings.php'), body: data);
     print(response.body);
@@ -30,8 +31,16 @@ class _ProviderCabCompletedStsState extends State<ProviderCabCompletedSts> {
     return jsonDecode(response.body);
   }
 
+  var lid;
   @override
   void initState() {
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print(lid);
+      });
+    });
     getData();
   }
 
@@ -58,9 +67,10 @@ class _ProviderCabCompletedStsState extends State<ProviderCabCompletedSts> {
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['book_id']}',
+                            'Booking ID : # ${snapshot.data[index]['book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(

@@ -1,10 +1,14 @@
 import 'dart:convert';
 
+import 'package:autoprohub/Location/location_controller.dart';
 import 'package:autoprohub/User/Services/Cab/cabDetailPage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import 'currentLocation.dart';
+import 'nearbyCabs.dart';
 
 class ShowAllCabs extends StatefulWidget {
   ShowAllCabs({super.key, required this.vehType});
@@ -16,6 +20,7 @@ class ShowAllCabs extends StatefulWidget {
 class _ShowAllCabsState extends State<ShowAllCabs> {
   var flag = 0;
   var status;
+
   Future<dynamic> getData() async {
     var data = {'vehType': widget.vehType};
     var response =
@@ -37,10 +42,25 @@ class _ShowAllCabsState extends State<ShowAllCabs> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.blue,
+        isExtended: true,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CurrentLocation(
+                        vehType: widget.vehType,
+                      )));
+        },
+        label: const Text(' Show nearby '),
+        // icon: Icon(Icons.add)
+      ),
+
       appBar: AppBar(
         title: widget.vehType != null
             ? Text('${widget.vehType.toUpperCase()} BOOKING')
-            : Text('CAB BOOKING'),
+            : const Text('Nearby Cab'),
       ),
       // body: Card(
       //     child: Container(
@@ -50,12 +70,12 @@ class _ShowAllCabsState extends State<ShowAllCabs> {
           future: getData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
             } else if (snapshot.hasData) {
               if (snapshot.data == null || snapshot.data.isEmpty) {
-                return Text('No data available');
+                return const Text('No data available');
               } else {
                 return ListView.builder(
                     // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -83,7 +103,7 @@ class _ShowAllCabsState extends State<ShowAllCabs> {
                                     fit: BoxFit.fill,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Expanded(
@@ -103,25 +123,25 @@ class _ShowAllCabsState extends State<ShowAllCabs> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               Text(
                                                 '${snapshot.data[index]['name']}',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   //  backgroundColor: Colors.yellow,
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 5,
                                               ),
                                               RichText(
                                                 text: TextSpan(
                                                     text:
                                                         ' ₹ ${snapshot.data[index]['rate']}',
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
                                                         color: Colors.blue),
@@ -134,7 +154,7 @@ class _ShowAllCabsState extends State<ShowAllCabs> {
                                                       )
                                                     ]),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                             ],
@@ -183,7 +203,7 @@ class _ShowAllCabsState extends State<ShowAllCabs> {
                     });
               }
             } else {
-              return Text('No data available');
+              return const Text('No data available');
             }
           }),
     ));

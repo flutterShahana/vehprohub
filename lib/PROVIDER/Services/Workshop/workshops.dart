@@ -37,50 +37,59 @@ class _WorkshopState extends State<Workshop> {
         child: Center(
           child: IntrinsicWidth(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  height: 30.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // nav('car');
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ViewWorkshop(type: 'car')));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Colors.blue, // Change the button color here
-                    ),
-                    child: const Text(
-                      'Car',
-                      style: TextStyle(
-                        fontSize: 18,
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: SizedBox(
+                    height: 80.0,
+                    width: 150,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // nav('car');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ViewWorkshop(type: 'car')));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue
+                            .withOpacity(0.3), // Change the button color here
+                      ),
+                      child: const Text(
+                        'Car',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      //  nav('bike');
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: SizedBox(
+                    height: 80.0,
+                    width: 150,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        //  nav('bike');
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ViewWorkshop(type: 'bike')));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                    ),
-                    child: const Text(
-                      'Bike',
-                      style: TextStyle(
-                        fontSize: 18,
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ViewWorkshop(type: 'bike')));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green.withOpacity(0.3),
+                      ),
+                      child: const Text(
+                        'Bike',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),

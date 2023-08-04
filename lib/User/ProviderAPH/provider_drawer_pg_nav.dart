@@ -1,7 +1,9 @@
 import 'package:autoprohub/User/ProviderAPH/pro_adoffer_view.dart';
-import 'package:autoprohub/PROVIDER/provider_home.dart';
 import 'package:autoprohub/User/ProviderAPH/provider_mybooking.dart';
 import 'package:flutter/material.dart';
+import '../../PROVIDER/Home_Pro/provider_home.dart';
+import '../../SP/sp.dart';
+import '../Home/userProfile.dart';
 import '../media.dart';
 import '../screen5profile.dart';
 
@@ -13,18 +15,30 @@ class ProvderDrawerPg extends StatefulWidget {
 }
 
 class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
+  int myIndex = 0;
 
-  int myIndex=0;
-  List<Widget>widgetList = const [
-    HomeProvider(),
-    ProviderMybooking(),
-    ProviderAdofferView()
-    ,Medias(),
-  Screenprofile(),
-  ];
+  var lid;
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print('0000000000000000>>>lid:${lid}<<<000000000000');
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> widgetList = [
+      HomeProvider(),
+      ProviderMybooking(),
+      ProviderAdofferView(),
+      Medias(),
+      UserProfile(lid: lid),
+    ];
     return Scaffold(
       body: Center(
         child: widgetList[myIndex],
@@ -35,18 +49,14 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
         backgroundColor: Colors.purple[300],
         actions: [
           IconButton(
-              onPressed: (){
-
+              onPressed: () {
                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>NotificationPage()));
-
               },
-              icon:const Icon(Icons.notification_important_sharp)
-          )
+              icon: const Icon(Icons.notification_important_sharp))
         ],
       ),
       drawer: Drawer(
         backgroundColor: Colors.purple[50],
-
         child: ListView(
           children: [
             DrawerHeader(
@@ -62,7 +72,6 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
 
                     //width: 100,
                     child: const CircleAvatar(
-
                       backgroundImage: AssetImage('images/img1.png'),
                       radius: 30,
                     ),
@@ -73,37 +82,40 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
                   Container(
                     // color: Colors.red,
                     width: 120,
-                    child:  Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
                           height: 35,
                         ),
-                        const Text("Neeraj M ",style: TextStyle(fontSize: 20,
-
-                        ),),
+                        const Text(
+                          "Neeraj M ",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
                         const SizedBox(
                           height: 5,
                         ),
                         const Wrap(
-
                           children: [
-                            Icon(Icons.phone,size: 18,),
+                            Icon(
+                              Icons.phone,
+                              size: 18,
+                            ),
                             SizedBox(
                               width: 10,
                             ),
                             Text("7356029002"),
                           ],
                         ),
-
-
                         const SizedBox(
                           height: 5,
                         ),
                         TextButton(
                           child: Text("EditProfile"),
-                          onPressed: (){
+                          onPressed: () {
                             // Navigator.push(context, MaterialPageRoute(builder: (context)=>EditProfilePage()));
                           },
                         ),
@@ -112,9 +124,7 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
                   ),
                 ],
               ),
-
             ),
-
             ListTile(
               leading: const Icon(Icons.home),
               title: const Text("Home"),
@@ -146,9 +156,7 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
               leading: Icon(Icons.history),
               title: Text("History"),
               onTap: () {
-
                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>const BookSts()));
-
               },
             ),
             const Divider(
@@ -161,9 +169,7 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
               leading: Icon(Icons.payment_sharp),
               title: Text("Payment Status"),
               onTap: () {
-
                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>const Paymenthis()));
-
               },
             ),
             const Divider(
@@ -176,7 +182,6 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
               leading: const Icon(Icons.rate_review),
               title: Text("Review"),
               onTap: () {
-
                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewRatingFeedbackPage()));
 
                 // Handle navigation to review page
@@ -199,43 +204,35 @@ class _ProvderDrawerPgState extends State<ProvderDrawerPg> {
         ),
       ),
 
-
-      bottomNavigationBar:BottomNavigationBar(
-
+      bottomNavigationBar: BottomNavigationBar(
         // showSelectedLabels: false,
         showUnselectedLabels: false,
 
         backgroundColor: Colors.purpleAccent[100],
         type: BottomNavigationBarType.fixed,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
-
-            myIndex=index;
-
+            myIndex = index;
           });
         },
         currentIndex: myIndex,
 
         items: [
-
-          BottomNavigationBarItem(icon:const Icon(Icons.home,),
-              label: "Home",backgroundColor: Colors.purpleAccent[100]),
-
-          const BottomNavigationBarItem(icon:Icon(Icons.book_online_rounded),
-              label: "My Bookings"),
-
-          const BottomNavigationBarItem(icon:Icon(Icons.local_offer_rounded),
-              label: "Add Offers"),
-
-          const BottomNavigationBarItem(icon:Icon(Icons.perm_media_outlined),
-              label: "Media"),
-
-
-          const BottomNavigationBarItem(icon:Icon(Icons.person),
-              label: "Profile"),
-
+          BottomNavigationBarItem(
+              icon: const Icon(
+                Icons.home,
+              ),
+              label: "Home",
+              backgroundColor: Colors.purpleAccent[100]),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.book_online_rounded), label: "My Bookings"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.local_offer_rounded), label: "Add Offers"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.perm_media_outlined), label: "Media"),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.person), label: "Profile"),
         ],
-
       ),
       // body: Center(
       //   child: Column(

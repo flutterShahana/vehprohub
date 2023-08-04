@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'Services/Cab/cabServices.dart';
 import 'Services/Rent/rentalService.dart';
-import 'Services/Workshop/workshipService.dart';
+import 'Services/Workshop/workshopService.dart';
 // import 'package:myapp1/pjt1/accessoriesservices.dart';
 // import 'package:myapp1/pjt1/cabServices.dart';
 // import 'package:myapp1/pjt1/rentalservices.dart';

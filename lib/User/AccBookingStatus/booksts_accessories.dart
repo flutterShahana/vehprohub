@@ -4,6 +4,8 @@ import 'package:autoprohub/User/BOOKINGSTATUS/accessory_unsuccesful_sts.dart';
 import 'package:autoprohub/User/AccBookingStatus/accessory_upcoming.dart';
 import 'package:flutter/material.dart';
 
+import 'accessory_request_cancelled.dart';
+
 class BookStatusAccesories extends StatefulWidget {
   const BookStatusAccesories({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class _BookStatusAccesoriesState extends State<BookStatusAccesories> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         //
         // appBar: AppBar(
@@ -47,6 +49,7 @@ class _BookStatusAccesoriesState extends State<BookStatusAccesories> {
                   Tab(text: "Upcoming"),
                   Tab(text: "Requested"),
                   Tab(text: "Completed"),
+                  Tab(text: "Cancelled"),
                 ],
                 isScrollable: true,
               ),
@@ -57,6 +60,7 @@ class _BookStatusAccesoriesState extends State<BookStatusAccesories> {
                   AccessoryUpcomingSts(),
                   AccessoryRequestSts(),
                   AccessoryCompletedSts(),
+                  AccessoryRequestCancelled()
                 ],
               ),
             ),

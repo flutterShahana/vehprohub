@@ -49,7 +49,9 @@ class _CabservicesState extends State<Cabservices> {
     var data = {'vehType': vehType};
     var response =
         await post(Uri.parse('${Con.url}USER/userViewCabs.php'), body: data);
-    print('Response: ${response.body}');
+    print('*************CAB SERVICES****************');
+    print(response.body);
+    print('**********************************');
 
     jsonDecode(response.body)[0]['result'] == 'success' ? flag = 1 : flag = 0;
     switch (vehType) {

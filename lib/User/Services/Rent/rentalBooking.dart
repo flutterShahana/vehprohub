@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:autoprohub/User/Services/Rent/rentalService.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 import '../../../CONNECTION/connect.dart';
 import '../../../SP/sp.dart';
@@ -23,6 +24,42 @@ class _RentalBookingState extends State<RentalBooking> {
   var status;
   var amt;
   var lid;
+  TimeOfDay _selectedTime = TimeOfDay.now();
+  DateTime _selectedDate = DateTime.now();
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime,
+    );
+    if (picked != null && picked != _selectedTime) {
+      print(picked); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedTime = picked.format(context);
+      print(formattedTime);
+      setState(() {
+        _selectedTime = picked;
+
+        pickTime.text = formattedTime;
+      });
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedDate) {
+      print(picked); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+      print(formattedDate);
+      setState(() {
+        //  _selectedDate = picked;
+        pickDate.text = formattedDate;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -106,7 +143,9 @@ class _RentalBookingState extends State<RentalBooking> {
                     decoration: InputDecoration(
                       label: Text('Pick up Date'),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      _selectDate(context);
+                    },
                   ),
                   TextFormField(
                     controller: pickTime,
@@ -114,7 +153,9 @@ class _RentalBookingState extends State<RentalBooking> {
                     decoration: InputDecoration(
                       label: Text('Pick up Time'),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      _selectTime(context);
+                    },
                   ),
                   SizedBox(
                     height: 30,

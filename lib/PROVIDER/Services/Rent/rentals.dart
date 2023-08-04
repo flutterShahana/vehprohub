@@ -10,8 +10,13 @@ class Rentals extends StatefulWidget {
 }
 
 class _RentalsState extends State<Rentals> {
-  void nav(String type){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewRentals(type: type,)));
+  void nav(String type) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ViewRentals(
+                  type: type,
+                )));
   }
 
   @override
@@ -27,83 +32,91 @@ class _RentalsState extends State<Rentals> {
         child: Center(
           child: IntrinsicWidth(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(
-                  height: 30.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      nav('Car');
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, // Change the button color here
-                    ),
-                    child: const Text(
-                      'Car',
-                      style: TextStyle(
-                        fontSize: 18,
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: SizedBox(
+                    height: 80.0,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        nav('Car');
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue
+                            .withOpacity(0.3), // Change the button color here
+                      ),
+                      child: const Text(
+                        'Car',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      nav('Bike');
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: SizedBox(
+                    height: 80.0,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        nav('Bike');
 
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                    ),
-                    child: const Text(
-                      'Bike',
-                      style: TextStyle(
-                        fontSize: 18,
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green.withOpacity(0.3),
+                      ),
+                      child: const Text(
+                        'Bike',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      nav('Luxury Car');
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                    ),
-                    child: const Text(
-                      'Luxury Car',
-                      style: TextStyle(
-                        fontSize: 18,
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: SizedBox(
+                    height: 80.0,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        nav('Luxury Car');
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.orange.withOpacity(0.3),
+                      ),
+                      child: const Text(
+                        'Luxury Car',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 30.0,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      nav('Luxury Bike');
-                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
-
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.red,
-                    ),
-                    child: const Text(
-                      'Luxury Bike',
-                      style: TextStyle(
-                        fontSize: 18,
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: SizedBox(
+                    height: 80.0,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        nav('Luxury Bike');
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>const ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red.withOpacity(0.3),
+                      ),
+                      child: const Text(
+                        'Luxury Bike',
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),

@@ -68,8 +68,47 @@ class SharedPreferencesHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(loginIdKey) ?? '';
   }
+
   static Future<void> clearData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(loginIdKey);
+  }
+}
+
+class SharedPreferencesHelper_service {
+  static const String serviceKey = 'service';
+
+  static Future<void> saveData(String service) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(serviceKey, service);
+  }
+
+  static Future<String> getSavedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(serviceKey) ?? '';
+  }
+
+  static Future<void> clearData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(serviceKey);
+  }
+}
+
+class SharedPreferencesHelper_WSname {
+  static const String WSname = 'name';
+
+  static Future<void> saveData(String name) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(WSname, name);
+  }
+
+  static Future<String> getSavedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString(WSname) ?? '';
+  }
+
+  static Future<void> clearData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(WSname);
   }
 }

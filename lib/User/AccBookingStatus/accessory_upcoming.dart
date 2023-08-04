@@ -46,6 +46,35 @@ class _AccessoryUpcomingStsState extends State<AccessoryUpcomingSts> {
     return jsonDecode(response.body);
   }
 
+  Future<dynamic> cancel() async {
+    var data = {
+      'booking_id': booikingId,
+    };
+    print(data);
+    var response = await post(
+        Uri.parse('${Con.url}USER/Bookings/cancelBooking_acc.php'),
+        body: data);
+    print(response.body);
+    print(response.statusCode);
+    status = response.statusCode;
+    jsonDecode(response.body)['result'] == 'success' ? flag = 1 : flag = 0;
+    if (flag == 1) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Booking cancelled Successfully..')));
+      Navigator.pop(context);
+      // Navigator.pushReplacement(context,
+      //     MaterialPageRoute(builder: (context) => AccessoriesServices()));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Failed to cancel booking...')));
+      Navigator.pop(context);
+
+      // Navigator.pushReplacement(context,
+      //     MaterialPageRoute(builder: (context) => AccessoriesServices()));
+    }
+    //return jsonDecode(response.body);
+  }
+
   // Future<dynamic> sentData() async {
   //   updated_qnty = int.parse(qnty.text) - count;
   //   var data = {
@@ -105,6 +134,7 @@ class _AccessoryUpcomingStsState extends State<AccessoryUpcomingSts> {
             }
             return flag == 1
                 ? ListView.builder(
+                    padding: EdgeInsets.all(15),
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       return Card(
@@ -114,6 +144,7 @@ class _AccessoryUpcomingStsState extends State<AccessoryUpcomingSts> {
                             '# ${snapshot.data[index]['acc_book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(
@@ -137,39 +168,95 @@ class _AccessoryUpcomingStsState extends State<AccessoryUpcomingSts> {
                                 style: tileText,
                               ),
                               Text(
-                                'Rate:# ${snapshot.data[index]['rate']}',
-                                style: tileText,
-                              ),
-                              Text(
                                 'Enquiry: ${snapshot.data[index]['pro_phone']}',
                                 style: tileText,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: OutlinedButton(
-                                        onPressed: () {
-                                          booikingId = snapshot.data[index]
-                                              ['acc_book_id'];
-                                          print('Booking Id:$booikingId');
-                                          print(
-                                              'Accessory ID: ${snapshot.data[index]['acc_id'].toString()}');
+                              Divider(),
+                              Text(
+                                'Total Amount: ₹ ${snapshot.data[index]['tot']}',
+                                style: tileText,
+                              ),
+                              Divider(),
+                              RichText(
+                                text: TextSpan(
+                                    text: ' Payment Status:  ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.blue),
+                                    children: [
+                                      TextSpan(
+                                        text:
+                                            '${snapshot.data[index]['pay_status']}',
+                                        style: TextStyle(color: Colors.red),
+                                      )
+                                    ]),
+                              ),
+                              Divider(),
+                              Visibility(
+                                visible:
+                                    snapshot.data[index]['pay_status'] == 'paid'
+                                        ? false
+                                        : true,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: OutlinedButton(
+                                          onPressed: () {
+                                            booikingId = snapshot.data[index]
+                                                ['acc_book_id'];
+                                            print('Booking Id:$booikingId');
+                                            print(
+                                                'Accessory ID: ${snapshot.data[index]['acc_id'].toString()}');
 
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      AccessoryPay(
-                                                        bookingID: booikingId,
-                                                        amt: snapshot
-                                                            .data[index]['tot'],
-                                                      )));
-                                        },
-                                        child: Text('Pay to proceed')),
-                                  ),
-                                ],
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        AccessoryPay(
+                                                          bookingID: booikingId,
+                                                          amt: snapshot
+                                                                  .data[index]
+                                                              ['tot'],
+                                                        )));
+                                          },
+                                          child: Text('Pay to proceed')),
+                                    ),
+                                    Expanded(
+                                      child: OutlinedButton(
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    content: Text(
+                                                        'Confirm Cancellation'),
+                                                    title: Text(
+                                                        'Do you want to cancel ..'),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            booikingId = snapshot
+                                                                    .data[index]
+                                                                ['acc_book_id'];
+                                                            cancel();
+                                                          },
+                                                          child: Text('Yes')),
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: Text('No')),
+                                                    ],
+                                                  );
+                                                });
+                                          },
+                                          child: Text('Cancel')),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

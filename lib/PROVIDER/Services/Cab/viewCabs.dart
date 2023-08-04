@@ -39,16 +39,24 @@ class _ViewCabsState extends State<ViewCabs> {
       });
     });
     getData();
+    _refresh();
   }
 
   var flag;
   var cab_id;
   var rate = TextEditingController();
+  Future<void> _refresh() async {
+    // Simulate a delay for fetching new data
+    await Future.delayed(Duration(seconds: 1));
+    setState(() {});
+  }
+
   Future<dynamic> getData() async {
     var data = {
       'pro_id': lid.toString(),
       'type': widget.type,
     };
+    print(data);
 
     var response = await post(Uri.parse('${Con.url}viewCabs.php'), body: data);
     print(response.body);

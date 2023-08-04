@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../Cab/currentLocation.dart';
 import 'accessoriesDetailPage.dart';
 
 class ShowAllAccessories extends StatefulWidget {
@@ -40,6 +41,21 @@ class _ShowAllAccessoriesState extends State<ShowAllAccessories> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.blue,
+        isExtended: true,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CurrentLocation(
+                        vehType: widget.vehType,
+                      )));
+        },
+        label: Text(' Show nearby '),
+        // icon: Icon(Icons.add)
+      ),
+
       appBar: AppBar(
         title: widget.vehType != null
             ? Text('${widget.vehType.toUpperCase()} BOOKING')

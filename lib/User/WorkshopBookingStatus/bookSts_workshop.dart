@@ -1,8 +1,10 @@
-
-import 'package:autoprohub/User/BOOKINGSTATUS/workshop_cancelledsts.dart';
-import 'package:autoprohub/User/BOOKINGSTATUS/workshop_completed_sts.dart';
-import 'package:autoprohub/User/BOOKINGSTATUS/workshop_unsuccessful_sts.dart';
-import 'package:autoprohub/User/BOOKINGSTATUS/workshop_upcoming.dart';
+import 'package:autoprohub/User/RentalBookingStatus/rentalrequeststs.dart';
+import 'package:autoprohub/User/RentalBookingStatus/rentalcompletedsts.dart';
+import 'package:autoprohub/User/BOOKINGSTATUS/rentalunsuccesfulsts.dart';
+import 'package:autoprohub/User/RentalBookingStatus/rentalupcomingsts.dart';
+import 'package:autoprohub/User/WorkshopBookingStatus/workshopRequeststs.dart';
+import 'package:autoprohub/User/WorkshopBookingStatus/workshopUpcomingsts.dart';
+import 'package:autoprohub/User/WorkshopBookingStatus/workshopcompletedsts.dart';
 import 'package:flutter/material.dart';
 
 class BookStatusWorkshop extends StatefulWidget {
@@ -16,7 +18,7 @@ class _BookStatusWorkshopState extends State<BookStatusWorkshop> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         //
         // appBar: AppBar(
@@ -26,21 +28,18 @@ class _BookStatusWorkshopState extends State<BookStatusWorkshop> {
         //
 
         // ),
-        body:Column(
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             Container(
-
               // height: 45,
               // // width: 300,
               decoration: BoxDecoration(
                 color: Colors.blue[200],
                 // borderRadius: BorderRadius(),
               ),
-              child:
-              TabBar(
+              child: TabBar(
                 indicator: BoxDecoration(
                   color: Colors.blue[400],
                   // borderRadius: BorderRadius.circular(25.0),
@@ -48,23 +47,19 @@ class _BookStatusWorkshopState extends State<BookStatusWorkshop> {
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.black,
                 tabs: const [
-
-                  Tab(text: "Upcoming.W"),
-                  Tab(text: "Cancelled.W"),
-                  Tab(text: "Completed.W"),
-                  Tab(text: "Unsuccessful.W"),
+                  Tab(text: "Upcoming"),
+                  Tab(text: "Requested"),
+                  Tab(text: "Completed"),
                 ],
                 isScrollable: true,
-              ) ,
+              ),
             ),
-            const Expanded(
-              child:
-              TabBarView(
+            Expanded(
+              child: TabBarView(
                 children: [
-                  WorkshopUpcomingsts(),
-                  WorkshopCancelledsts(),
-                  WorkshopCompletedsts(),
-                  WorshopUnsuccessfulsts(),
+                  WorkshopUpcomingSts(),
+                  WorkshopRequestSts(),
+                  WorkshopCompletedSts(),
                 ],
               ),
             ),
@@ -72,7 +67,5 @@ class _BookStatusWorkshopState extends State<BookStatusWorkshop> {
         ),
       ),
     );
-
-
   }
 }

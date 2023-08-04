@@ -70,6 +70,7 @@ class _AccessoryRequestStsState extends State<AccessoryRequestSts> {
                             '# ${snapshot.data[index]['acc_book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(

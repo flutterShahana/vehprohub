@@ -49,7 +49,9 @@ class _RentalServicesState extends State<RentalServices> {
     var data = {'vehType': vehType};
     var response =
         await post(Uri.parse('${Con.url}USER/userViewRentals.php'), body: data);
-    print('Response: ${response.body}');
+    print('*************RENTAL SERVICES****************');
+    print(response.body);
+    print('**********************************');
 
     jsonDecode(response.body)[0]['result'] == 'success' ? flag = 1 : flag = 0;
     switch (vehType) {

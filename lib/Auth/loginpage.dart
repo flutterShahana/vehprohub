@@ -2,16 +2,15 @@ import 'dart:convert';
 
 import 'package:autoprohub/Auth/acctcreateusr.dart';
 import 'package:autoprohub/FIRSTLOG/forgotpassword.dart';
-import 'package:autoprohub/PROVIDER/pro_bottomNavBar.dart';
-import 'package:autoprohub/PROVIDER/provider_home.dart';
-import 'package:autoprohub/User/homepage.dart';
+import 'package:autoprohub/PROVIDER/Home_Pro/pro_bottomNavBar.dart';
+import 'package:autoprohub/User/Home/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../CONNECTION/connect.dart';
 import '../SP/sp.dart';
-import '../User/bottomNavbarPage.dart';
+import '../User/Home/bottomNavbarPage.dart';
 import 'logusrspin.dart';
 
 class Login_pg extends StatefulWidget {
@@ -27,7 +26,7 @@ class _Login_pgState extends State<Login_pg> {
   var user;
   var flag = 0;
   var lati, longi, location, place, loginID;
-
+  bool _passwordVisible = false;
   Future<dynamic> login() async {
     print('inside login function');
     var data = {
@@ -43,7 +42,19 @@ class _Login_pgState extends State<Login_pg> {
     if (response.statusCode == 200) {
       if (jsonDecode(response.body)['message'] ==
           'User Successfully Logged In') {
-        flag = 1;
+        var approvalstatus = jsonDecode(response.body)['approval_status'];
+        switch (approvalstatus) {
+          case 'approved':
+            flag = 1;
+            break;
+          case 'rejected':
+            flag = 2;
+            break;
+          case 'requested':
+            flag = 3;
+            break;
+        }
+        //  flag = 1;
         print('flag value:$flag');
         loginID = jsonDecode(response.body)['login_id'];
 
@@ -51,17 +62,17 @@ class _Login_pgState extends State<Login_pg> {
         print('loginID inside sign in success :$loginID');
 
         // saveData(loginID);
-        SharedPreferencesHelper.saveData(loginID).then((_) {
-          print('sp saved...');
-        }).catchError((error) {
-          print('sp saving failed..');
-          // Error occurred while saving the login ID
-          // Handle the error as needed
-        });
 
         //myLocation();
 
         if (flag == 1) {
+          SharedPreferencesHelper.saveData(loginID).then((_) {
+            print('sp saved...');
+          }).catchError((error) {
+            print('sp saving failed..');
+            // Error occurred while saving the login ID
+            // Handle the error as needed
+          });
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('Logging In ...')));
           if (widget.usertype == 'user') {
@@ -73,18 +84,26 @@ class _Login_pgState extends State<Login_pg> {
                 MaterialPageRoute(
                     builder: (context) => ProviderBottomNavBarPage()));
           }
-        } else {
+        } else if (flag == 2) {
+          setState(() {});
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text('Login denied..')));
+        } else if (flag == 3) {
           setState(() {});
           ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Invalid Credentials!!Login Failed...')));
+              SnackBar(content: Text('Waiting for registration approval...')));
+        } else {
+          setState(() {});
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Invalid Credentials !! Login Failed...')));
           // Navigator.pushReplacement(context,
           //     MaterialPageRoute(builder: (context) => Login()));
         }
       } else {
         setState(() {});
 
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Login Failed')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Invalid Credentials !! Login Failed')));
         // Navigator.pushReplacement(context,
         //     MaterialPageRoute(builder: (context) => Login(
         //
@@ -147,11 +166,11 @@ class _Login_pgState extends State<Login_pg> {
                 child: TextFormField(
                   controller: email,
                   decoration: const InputDecoration(
-                    labelText: 'Email',
-                    filled: true,
-                    fillColor: Colors.white,
-                    prefixIcon: Icon(Icons.mail),
-                  ),
+                      labelText: 'Email',
+                      filled: true,
+                      fillColor: Colors.white,
+                      prefixIcon: Icon(Icons.mail),
+                      suffixIcon: Icon(Icons.alternate_email)),
                 ),
               ),
               const SizedBox(height: 18.0),
@@ -159,12 +178,25 @@ class _Login_pgState extends State<Login_pg> {
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: TextFormField(
                   controller: pswd,
-                  obscureText: true,
-                  decoration: const InputDecoration(
+                  obscureText: !_passwordVisible,
+                  // obscureText: true,
+                  decoration: InputDecoration(
                     labelText: 'Password',
                     filled: true,
                     fillColor: Colors.white,
                     prefixIcon: Icon(Icons.lock),
+                    suffixIcon: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                      child: Icon(
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                    ),
                   ),
                 ),
               ),

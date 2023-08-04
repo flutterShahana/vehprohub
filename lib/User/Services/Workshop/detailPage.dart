@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../Cab/currentLocation.dart';
 
 class WorkshopDetailPage extends StatefulWidget {
   WorkshopDetailPage(
@@ -16,6 +17,7 @@ class WorkshopDetailPage extends StatefulWidget {
 
 class _WorkshopDetailPageState extends State<WorkshopDetailPage> {
   var flag = 0;
+  var res;
   @override
   void initState() {
     super.initState();
@@ -31,13 +33,21 @@ class _WorkshopDetailPageState extends State<WorkshopDetailPage> {
     };
     print(data);
     var response = await post(
-        Uri.parse('${Con.url}USER/userViewWorshopService.php'),
+        Uri.parse('${Con.url}USER/userViewWorkshopService.php'),
         body: data);
+    print('------------all Workshop service -------------------');
     print(response.body);
     print(response.statusCode);
-    print('Response: ${response.body}');
-
-    jsonDecode(response.body)[0]['result'] == 'success' ? flag = 1 : flag = 0;
+    print('-----------------------------------');
+    jsonDecode(response.body)[0]['result'] == 'success'
+        ? {
+            flag = 1,
+            res = jsonDecode(response.body),
+            print('********************'),
+            print(res),
+            print('**************')
+          }
+        : flag = 0;
 
     return jsonDecode(response.body);
   }
@@ -46,6 +56,20 @@ class _WorkshopDetailPageState extends State<WorkshopDetailPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.blue,
+          isExtended: true,
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CurrentLocation(
+                          vehType: widget.veh_type,
+                        )));
+          },
+          label: const Text(' Show nearby '),
+          // icon: Icon(Icons.add)
+        ),
         appBar:
             AppBar(title: Text('${widget.veh_type} ${widget.service_type}')),
         body: Padding(
@@ -62,7 +86,7 @@ class _WorkshopDetailPageState extends State<WorkshopDetailPage> {
                 }
 
                 return flag == 0
-                    ? Center(child: Text('Nothing to show'))
+                    ? const Center(child: Text('Nothing to show'))
                     : ListView.builder(
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {

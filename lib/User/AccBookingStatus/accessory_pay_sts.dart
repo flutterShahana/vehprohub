@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../CONNECTION/connect.dart';
+import '../Services/Accessory/accessoriesService.dart';
 
 class AccessoryPay extends StatefulWidget {
   AccessoryPay({Key? key, required this.bookingID, required this.amt})
@@ -22,8 +23,8 @@ class _AccessoryPayState extends State<AccessoryPay> {
   var booikingId;
   var amt = TextEditingController();
   var selected_payType;
-  var selectedIndex;
-  var _selectedPay;
+  var selectedIndex = -1;
+  var _selectedPay = 'Cash';
   var count, updated_qnty;
 
   List<String> pay = [
@@ -33,35 +34,36 @@ class _AccessoryPayState extends State<AccessoryPay> {
     'assets/images/other2.png',
   ];
 
-  // Future<dynamic> sentData() async {
-  //   updated_qnty = int.parse(qnty.text) - count;
-  //   var data = {
-  //     'acc_id': widget.acc_id,
-  //     'user_id': '1',
-  //     'qnty': count.toString(),
-  //     'updated_qnty': updated_qnty.toString(),
-  //     'date': DateTime.now().toString(),
-  //   };
-  //   print(data);
-  //   var response =
-  //   await post(Uri.parse('${Con.url}USER/accBooking.php'), body: data);
-  //   print(response.body);
-  //   print(response.statusCode);
-  //   status = response.statusCode;
-  //   jsonDecode(response.body)['result'] == 'success' ? flag = 1 : flag = 0;
-  //   if (flag == 1) {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text('Request sent Successfully..')));
-  //     Navigator.pushReplacement(context,
-  //         MaterialPageRoute(builder: (context) => AccessoriesServices()));
-  //   } else {
-  //     ScaffoldMessenger.of(context)
-  //         .showSnackBar(SnackBar(content: Text('Failed to sent request...')));
-  //     Navigator.pushReplacement(context,
-  //         MaterialPageRoute(builder: (context) => AccessoriesServices()));
-  //   }
-  //   //return jsonDecode(response.body);
-  // }
+  Future<dynamic> sentData() async {
+    var data = {
+      'pay_type': selected_payType,
+      'pay_method': _selectedPay,
+      'pay_status': selected_payType == 'Online' ? 'paid' : 'pending',
+      'booking_id': widget.bookingID,
+    };
+    print(data);
+    var response =
+        await post(Uri.parse('${Con.url}USER/Payment/accPay.php'), body: data);
+    print(response.body);
+    print(response.statusCode);
+    status = response.statusCode;
+    jsonDecode(response.body)['result'] == 'success' ? flag = 1 : flag = 0;
+    if (flag == 1) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Request sent Successfully..')));
+      Navigator.pop(context);
+      // Navigator.pushReplacement(context,
+      //     MaterialPageRoute(builder: (context) => AccessoriesServices()));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Failed to sent request...')));
+      Navigator.pop(context);
+
+      // Navigator.pushReplacement(context,
+      //     MaterialPageRoute(builder: (context) => AccessoriesServices()));
+    }
+    //return jsonDecode(response.body);
+  }
 
   @override
   void initState() {
@@ -114,7 +116,7 @@ class _AccessoryPayState extends State<AccessoryPay> {
             ),
             RadioListTile(
                 title: Text('Online'),
-                value: 'online',
+                value: 'Online',
                 groupValue: selected_payType,
                 onChanged: (val) {
                   setState(() {
@@ -123,7 +125,7 @@ class _AccessoryPayState extends State<AccessoryPay> {
                 }),
             RadioListTile(
                 title: Text('COD'),
-                value: 'cod',
+                value: 'COD',
                 groupValue: selected_payType,
                 onChanged: (val) {
                   setState(() {
@@ -134,7 +136,7 @@ class _AccessoryPayState extends State<AccessoryPay> {
               height: 30,
             ),
             Visibility(
-              visible: (selected_payType == 'online') ? true : false,
+              visible: (selected_payType == 'Online') ? true : false,
               child: Container(
                 height: 200,
                 width: 350,
@@ -208,12 +210,27 @@ class _AccessoryPayState extends State<AccessoryPay> {
                           _selectedPay = 'Other';
                           break;
                       }
-
-                      if (selectedIndex == -1) {
+                      if (selected_payType == 'Online') {
+                        if (selectedIndex == -1) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text(
+                              'Select Payment Method',
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            backgroundColor: Color(0xfa8f7805),
+                          ));
+                        } else {
+                          sentData();
+                        }
+                      } else if (selected_payType == 'COD') {
+                        sentData();
+                      } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text(
-                            'select payment method',
+                            'Select Payment Type',
                             style: TextStyle(fontSize: 20, color: Colors.white),
                           ),
                           backgroundColor: Color(0xfa8f7805),

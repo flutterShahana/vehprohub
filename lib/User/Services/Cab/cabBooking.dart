@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:autoprohub/User/Services/Cab/cabservices.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 
 import '../../../CONNECTION/connect.dart';
 import '../../../SP/sp.dart';
@@ -23,6 +24,42 @@ class _CabBookingState extends State<CabBooking> {
   var flag = 0;
   var status;
   var lid;
+  TimeOfDay _selectedTime = TimeOfDay.now();
+  DateTime _selectedDate = DateTime.now();
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: _selectedTime,
+    );
+    if (picked != null && picked != _selectedTime) {
+      print(picked); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedTime = picked.format(context);
+      print(formattedTime);
+      setState(() {
+        _selectedTime = picked;
+
+        time.text = formattedTime;
+      });
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != _selectedDate) {
+      print(picked); //pickedDate output format => 2021-03-10 00:00:00.000
+      String formattedDate = DateFormat('yyyy-MM-dd').format(picked);
+      print(formattedDate);
+      setState(() {
+        //  _selectedDate = picked;
+        date.text = formattedDate;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -47,6 +84,7 @@ class _CabBookingState extends State<CabBooking> {
       'dest': dest.text,
       'bookingDate': date.text,
       'bookingTime': time.text,
+      'tot': widget.rate,
       'date': DateTime.now().toString(),
     };
     var response =
@@ -123,18 +161,22 @@ class _CabBookingState extends State<CabBooking> {
                   TextFormField(
                     controller: date,
                     keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      label: Text('Date'),
+                    decoration: const InputDecoration(
+                      label: Text('DD/MM/YYYY'),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      _selectDate(context);
+                    },
                   ),
                   TextFormField(
                     controller: time,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      label: Text('Time'),
+                      label: Text('Select Time'),
                     ),
-                    onTap: () {},
+                    onTap: () {
+                      _selectTime(context);
+                    },
                   ),
                   SizedBox(
                     height: 30,

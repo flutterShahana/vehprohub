@@ -4,6 +4,7 @@ import 'package:autoprohub/User/CabBookingStatus/cab_upcomingsts.dart';
 import 'package:flutter/material.dart';
 
 import 'cab_completed_sts.dart';
+import 'cab_request_cancelled.dart';
 
 class BookStsCab extends StatefulWidget {
   const BookStsCab({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _BookStsCabState extends State<BookStsCab> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         //
         // appBar: AppBar(
@@ -31,7 +32,7 @@ class _BookStsCabState extends State<BookStsCab> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              // height: 45,
+              // height: 750,
               // // width: 300,
               decoration: BoxDecoration(
                 color: Colors.blue[200],
@@ -48,6 +49,7 @@ class _BookStsCabState extends State<BookStsCab> {
                   Tab(text: "Upcoming"),
                   Tab(text: "Requested"),
                   Tab(text: "Completed"),
+                  Tab(text: "Cancelled"),
                   //Tab(text: "Unsuccessful"),
                 ],
                 isScrollable: true,
@@ -59,6 +61,7 @@ class _BookStsCabState extends State<BookStsCab> {
                   CabUpcomingSts(),
                   CabRequestSts(),
                   CabCompletedSts(),
+                  CabRequestCancelled()
                   // CabUnsuccessfulsts(),
                 ],
               ),

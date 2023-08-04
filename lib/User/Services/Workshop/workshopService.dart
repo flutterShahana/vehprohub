@@ -10,6 +10,7 @@ import 'package:searchbar_animation/searchbar_animation.dart';
 
 import '../../../CONNECTION/connect.dart';
 import '../../../PROVIDER/Services/Workshop/ServiceList/serviceList.dart';
+import '../../../SP/sp.dart';
 import '../../Ratings/viewRating.dart';
 
 class WorkshopServices extends StatefulWidget {
@@ -27,6 +28,7 @@ class _WorkshopServicesState extends State<WorkshopServices> {
   var luxCar_flag = 0;
   var luxBike_flag = 0;
   var flag;
+  var wsname;
   @override
   void initState() {
     super.initState();
@@ -222,6 +224,21 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                     ),
                                     TextButton(
                                         onPressed: () {
+                                          wsname = 'Basic Services';
+                                          print(wsname);
+                                          print(
+                                              'wsname inside button press :$wsname');
+
+                                          // saveData(loginID);
+                                          SharedPreferencesHelper_WSname
+                                                  .saveData(wsname)
+                                              .then((_) {
+                                            print('sp wsname saved...');
+                                          }).catchError((error) {
+                                            print('sp wsname saving failed..');
+                                            // Error occurred while saving the login ID
+                                            // Handle the error as needed
+                                          });
                                           navToDetailPage(
                                               'Car', 'Basic Services');
                                         },
@@ -273,6 +290,21 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                     ),
                                     TextButton(
                                         onPressed: () {
+                                          wsname = 'Mid Range Services';
+                                          print(wsname);
+                                          print(
+                                              'wsname inside button press :$wsname');
+
+                                          // saveData(loginID);
+                                          SharedPreferencesHelper_WSname
+                                                  .saveData(wsname)
+                                              .then((_) {
+                                            print('sp wsname saved...');
+                                          }).catchError((error) {
+                                            print('sp wsname saving failed..');
+                                            // Error occurred while saving the login ID
+                                            // Handle the error as needed
+                                          });
                                           navToDetailPage(
                                               'Car', 'Mid Range Services');
                                         },
@@ -325,6 +357,21 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                     ),
                                     TextButton(
                                         onPressed: () {
+                                          wsname = 'Major Services';
+                                          print(wsname);
+                                          print(
+                                              'wsname inside button press :$wsname');
+
+                                          // saveData(loginID);
+                                          SharedPreferencesHelper_WSname
+                                                  .saveData(wsname)
+                                              .then((_) {
+                                            print('sp wsname saved...');
+                                          }).catchError((error) {
+                                            print('sp wsname saving failed..');
+                                            // Error occurred while saving the login ID
+                                            // Handle the error as needed
+                                          });
                                           navToDetailPage(
                                               'Car', 'Major Services');
                                         },
@@ -422,6 +469,21 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                     ),
                                     TextButton(
                                         onPressed: () {
+                                          wsname = 'Basic Services';
+                                          print(wsname);
+                                          print(
+                                              'wsname inside button press :$wsname');
+
+                                          // saveData(loginID);
+                                          SharedPreferencesHelper_WSname
+                                                  .saveData(wsname)
+                                              .then((_) {
+                                            print('sp wsname saved...');
+                                          }).catchError((error) {
+                                            print('sp wsname saving failed..');
+                                            // Error occurred while saving the login ID
+                                            // Handle the error as needed
+                                          });
                                           navToDetailPage(
                                               'Bike', 'Basic Services');
                                         },
@@ -473,6 +535,21 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                     ),
                                     TextButton(
                                         onPressed: () {
+                                          wsname = 'Mid Range Services';
+                                          print(wsname);
+                                          print(
+                                              'wsname inside button press :$wsname');
+
+                                          // saveData(loginID);
+                                          SharedPreferencesHelper_WSname
+                                                  .saveData(wsname)
+                                              .then((_) {
+                                            print('sp wsname saved...');
+                                          }).catchError((error) {
+                                            print('sp wsname saving failed..');
+                                            // Error occurred while saving the login ID
+                                            // Handle the error as needed
+                                          });
                                           navToDetailPage(
                                               'Bike', 'Mid Range Services');
                                         },
@@ -526,6 +603,21 @@ class _WorkshopServicesState extends State<WorkshopServices> {
                                     ),
                                     TextButton(
                                         onPressed: () {
+                                          wsname = 'Major Services';
+                                          print(wsname);
+                                          print(
+                                              'wsname inside button press :$wsname');
+
+                                          // saveData(loginID);
+                                          SharedPreferencesHelper_WSname
+                                                  .saveData(wsname)
+                                              .then((_) {
+                                            print('sp wsname saved...');
+                                          }).catchError((error) {
+                                            print('sp wsname saving failed..');
+                                            // Error occurred while saving the login ID
+                                            // Handle the error as needed
+                                          });
                                           navToDetailPage(
                                               'Bike', 'Major Services');
                                         },

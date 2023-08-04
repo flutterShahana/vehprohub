@@ -49,7 +49,9 @@ class _AccessoriesServicesState extends State<AccessoriesServices> {
     var response = await post(
         Uri.parse('${Con.url}USER/userViewAccessories.php'),
         body: data);
-    print('Response: ${response.body}');
+    print('*************ACCESSORY SERVICES****************');
+    print(response.body);
+    print('**********************************');
 
     jsonDecode(response.body)[0]['result'] == 'success' ? flag = 1 : flag = 0;
     switch (vehType) {
