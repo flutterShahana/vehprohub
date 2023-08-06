@@ -153,8 +153,8 @@ class _AddOfferState extends State<AddOffer> {
                                   height: 200,
                                   width: 250,
                                   child: const Center(
-                                      child: Text(
-                                          '-- Click to select image --')),
+                                      child:
+                                          Text('-- Click to select image --')),
                                 ),
                               ),
                             ),
@@ -220,7 +220,15 @@ class _AddOfferState extends State<AddOffer> {
                           // backgroundColor: color,
                           ),
                       onPressed: () {
-                        sendData(_image!);
+                        if (_image != null &&
+                            start.text.isNotEmpty &&
+                            end.text.isNotEmpty) {
+                          sendData(_image!);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content:
+                                  Text('Check All fields entered properly')));
+                        }
                       },
                       child: const Center(
                           child: Text(

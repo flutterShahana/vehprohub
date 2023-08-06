@@ -1,34 +1,52 @@
 import 'dart:convert';
 
 import 'package:autoprohub/Style/styles.dart';
+import 'package:autoprohub/User/WorkshopBookingStatus/wsPay.dart';
+import 'package:autoprohub/User/WorkshopBookingStatus/wsPay_advance.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-import '../../CONNECTION/connect.dart';
-import '../../SP/sp.dart';
+import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
-class WorkshopRequestSts extends StatefulWidget {
-  const WorkshopRequestSts({Key? key}) : super(key: key);
+class ProviderWorkshopRequestedSts extends StatefulWidget {
+  const ProviderWorkshopRequestedSts({Key? key}) : super(key: key);
 
   @override
-  State<WorkshopRequestSts> createState() => _WorkshopRequestStsState();
+  State<ProviderWorkshopRequestedSts> createState() =>
+      _ProviderWorkshopRequestedStsState();
 }
 
-class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
+class _ProviderWorkshopRequestedStsState
+    extends State<ProviderWorkshopRequestedSts> {
   // List<String> items = ['Item 1', 'Item 2', 'Item 3'];
   var flag = 0;
-  var status;
+  var reply;
+
+  var status, advance, booikingId, balance;
   Future<dynamic> getData() async {
-    var data = {'user_id': lid.toString(), 'req_status': 'requested'};
-    var response = await post(
-        Uri.parse('${Con.url}USER/BOOKINGS/viewMyWorkshopBooking.php'),
-        body: data);
+    var data = {'pro_id': lid.toString(), 'req_status': 'requested'};
+    var response =
+        await post(Uri.parse('${Con.url}viewWorkshopBookings.php'), body: data);
     print(response.body);
     print(response.statusCode);
     status = response.statusCode;
     jsonDecode(response.body)[0]['result'] == 'success' ? flag = 1 : flag = 0;
 
     return jsonDecode(response.body);
+  }
+
+  Future updateRequest() async {
+    var data = {'booikingId': booikingId.toString(), 'reply': reply};
+    print(data);
+    var response =
+        await post(Uri.parse("${Con.url}updateWSRequest.php"), body: data);
+    print(response.body);
+    jsonDecode(response.body)['result'] == 'success'
+        ? setState(() {})
+        : Navigator.pop(context);
+
+    return json.decode(response.body);
   }
 
   var lid;
@@ -100,6 +118,7 @@ class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
                                   'Requested Time:# ${snapshot.data[index]['booking_time']}',
                                   style: tileText,
                                 ),
+                                Divider(),
                                 Text(
                                   'Total Amount: ₹ ${snapshot.data[index]['amount']}',
                                   style: tileText,
@@ -110,10 +129,58 @@ class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
                                   style: tileText,
                                 ),
                                 ListTile(
+                                  leading: Container(
+                                    height: 30,
+                                    width: 30,
+                                  ),
                                   title: Text(
-                                    'Ph: ${snapshot.data[index]['pro_phone']}',
+                                    'Customer: ${snapshot.data[index]['username']}',
                                     style: tileText,
                                   ),
+                                  subtitle: Text(
+                                    'Ph: ${snapshot.data[index]['phone']}',
+                                    style: tileText,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: OutlinedButton(
+                                          onPressed: () {
+                                            booikingId = snapshot.data[index]
+                                                ['work_book_id'];
+                                            print('Booking Id:$booikingId');
+                                            print(
+                                                'WS ID: ${snapshot.data[index]['work_id'].toString()}');
+
+                                            reply = 'accepted';
+
+                                            setState(() {
+                                              updateRequest();
+                                            });
+                                          },
+                                          child: Text('Accept')),
+                                    ),
+                                    Expanded(
+                                      child: OutlinedButton(
+                                          onPressed: () {
+                                            booikingId = snapshot.data[index]
+                                                ['work_book_id'];
+                                            print('Booking Id:$booikingId');
+                                            print(
+                                                'WS ID: ${snapshot.data[index]['work_id'].toString()}');
+
+                                            reply = 'rejected';
+
+                                            setState(() {
+                                              updateRequest();
+                                            });
+                                          },
+                                          child: Text('Reject')),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),

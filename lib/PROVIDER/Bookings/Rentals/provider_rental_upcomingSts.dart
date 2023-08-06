@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
 class ProviderRentalUpcomingSts extends StatefulWidget {
   const ProviderRentalUpcomingSts({Key? key}) : super(key: key);
@@ -20,8 +21,9 @@ class _ProviderRentalUpcomingStsState extends State<ProviderRentalUpcomingSts> {
   var status;
   var booikingId;
   var reply;
+  var lid;
   Future<dynamic> getData() async {
-    var data = {'pro_id': '2', 'req_status': 'accepted'};
+    var data = {'pro_id': lid.toString(), 'req_status': 'accepted'};
     var response =
         await post(Uri.parse('${Con.url}viewRentalBookings.php'), body: data);
     print(response.body);
@@ -45,8 +47,31 @@ class _ProviderRentalUpcomingStsState extends State<ProviderRentalUpcomingSts> {
     return json.decode(response.body);
   }
 
+  Future updateVehicleReceivalStatus(id) async {
+    var data = {
+      'booikingId': id.toString(),
+    };
+    print(data);
+    var response = await post(
+        Uri.parse("${Con.url}updateVehicleReceivalStatus.php"),
+        body: data);
+    print(response.body);
+    jsonDecode(response.body)['result'] == 'success'
+        ? setState(() {})
+        : Navigator.pop(context);
+
+    return json.decode(response.body);
+  }
+
   @override
   void initState() {
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print(lid);
+      });
+    });
     getData();
   }
 
@@ -73,9 +98,10 @@ class _ProviderRentalUpcomingStsState extends State<ProviderRentalUpcomingSts> {
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['rent_book_id']}',
+                            'Booking ID :# ${snapshot.data[index]['rent_book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(
@@ -103,31 +129,85 @@ class _ProviderRentalUpcomingStsState extends State<ProviderRentalUpcomingSts> {
                                 style: tileText,
                               ),
                               Text(
-                                'Enquiry: ${snapshot.data[index]['phone']}',
+                                'Payment Status: ${snapshot.data[index]['pay_status']}',
                                 style: tileText,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: OutlinedButton(
-                                        onPressed: () {
-                                          booikingId = snapshot.data[index]
-                                              ['rent_book_id'];
-                                          print('Booking Id:$booikingId');
-                                          print(
-                                              'Rental ID: ${snapshot.data[index]['rental_id'].toString()}');
+                              Divider(),
+                              Text(
+                                'For Enquiry: ',
+                                style: tileText,
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                title: Text(
+                                  'Customer: ${snapshot.data[index]['username']}',
+                                  style: tileText,
+                                ),
+                                subtitle: Text(
+                                  'Ph: ${snapshot.data[index]['phone']}',
+                                  style: tileText,
+                                ),
+                              ),
+                              Visibility(
+                                visible: snapshot.data[index]['pay_status'] ==
+                                            'advance paid' &&
+                                        snapshot.data[index]
+                                                ['veh_receive_status'] ==
+                                            'pending'
+                                    ? true
+                                    : false,
+                                child: Container(
+                                    height: 120,
+                                    child: Column(
+                                      children: [
+                                        const Text(
+                                          'Mark Vehicle receival to get full payment',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                        OutlinedButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                updateVehicleReceivalStatus(
+                                                    snapshot.data[index]
+                                                        ['rent_book_id']);
+                                              });
+                                            },
+                                            child:
+                                                const Text('vehicle received'))
+                                      ],
+                                    )),
+                              ),
+                              Visibility(
+                                visible:
+                                    snapshot.data[index]['pay_status'] == 'paid'
+                                        ? true
+                                        : false,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: OutlinedButton(
+                                          onPressed: () {
+                                            booikingId = snapshot.data[index]
+                                                ['rent_book_id'];
+                                            print('Booking Id:$booikingId');
+                                            print(
+                                                'Rental ID: ${snapshot.data[index]['rental_id'].toString()}');
 
-                                          reply = 'completed';
+                                            reply = 'completed';
 
-                                          setState(() {
-                                            updateRequest();
-                                          });
-                                        },
-                                        child: Text('Mark completed')),
-                                  ),
-                                ],
+                                            setState(() {
+                                              updateRequest();
+                                            });
+                                          },
+                                          child: Text('Mark completed')),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

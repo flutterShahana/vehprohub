@@ -68,7 +68,7 @@ class _AccessoryRequestCancelledState extends State<AccessoryRequestCancelled> {
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['acc_book_id']}',
+                            'Booking ID :# ${snapshot.data[index]['acc_book_id']}',
                           ),
                           subtitle: ListView(
                             padding: EdgeInsets.all(15),
@@ -94,13 +94,21 @@ class _AccessoryRequestCancelledState extends State<AccessoryRequestCancelled> {
                                 'Quantity: ${snapshot.data[index]['quantity']}',
                                 style: tileText,
                               ),
+                              Divider(),
                               Text(
-                                'Rate:# ${snapshot.data[index]['rate']}',
+                                'Total Amount: ₹ ${snapshot.data[index]['tot']}',
                                 style: tileText,
                               ),
+                              Divider(),
                               Text(
-                                'Enquiry: ${snapshot.data[index]['pro_phone']}',
+                                'For Enquiry: ',
                                 style: tileText,
+                              ),
+                              ListTile(
+                                title: Text(
+                                  'Ph: ${snapshot.data[index]['pro_phone']}',
+                                  style: tileText,
+                                ),
                               ),
                             ],
                           ),

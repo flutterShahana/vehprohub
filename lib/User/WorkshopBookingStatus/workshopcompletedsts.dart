@@ -61,56 +61,82 @@ class _WorkshopCompletedStsState extends State<WorkshopCompletedSts> {
               }
             }
             return flag == 1
-                ? ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 10,
-                        child: ListTile(
-                          title: Text(
-                            '# ${snapshot.data[index]['work_book_id']}',
+                ? Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          elevation: 10,
+                          child: ListTile(
+                            title: Text(
+                              'Booking ID :# ${snapshot.data[index]['work_book_id']}',
+                            ),
+                            subtitle: ListView(
+                              padding: EdgeInsets.all(15),
+                              shrinkWrap: true,
+                              children: [
+                                Text(
+                                  'Workshop Service ID :# ${snapshot.data[index]['work_id']}',
+                                  style: tileTitle,
+                                ),
+                                Text(
+                                  'Type : ${snapshot.data[index]['type']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Service: ${snapshot.data[index]['serviceName']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Average time: ${snapshot.data[index]['avgTime']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Booking For: ${snapshot.data[index]['booking_date']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Requested Time:# ${snapshot.data[index]['booking_time']}',
+                                  style: tileText,
+                                ),
+                                Divider(),
+                                Text(
+                                  'Total Amount: ₹ ${snapshot.data[index]['amount']}',
+                                  style: tileText,
+                                ),
+                                Divider(),
+                                RichText(
+                                  text: TextSpan(
+                                      text: ' Payment Status:  ',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue),
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              '${snapshot.data[index]['pay_status']}',
+                                          style: TextStyle(color: Colors.red),
+                                        )
+                                      ]),
+                                ),
+                                Divider(),
+                                Text(
+                                  'For Enquiry: ',
+                                  style: tileText,
+                                ),
+                                ListTile(
+                                  title: Text(
+                                    'Ph: ${snapshot.data[index]['pro_phone']}',
+                                    style: tileText,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          subtitle: ListView(
-                            padding: EdgeInsets.all(15),
-                            shrinkWrap: true,
-                            children: [
-                              Text(
-                                'Workshop Service ID :# ${snapshot.data[index]['work_id']}',
-                                style: tileTitle,
-                              ),
-                              Text(
-                                'Type : ${snapshot.data[index]['type']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Service: ${snapshot.data[index]['serviceName']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Average time: ${snapshot.data[index]['avgTime']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Booking For: ${snapshot.data[index]['booking_date']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Requested Time:# ${snapshot.data[index]['booking_time']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Total Amount: ₹ ${snapshot.data[index]['amount']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Enquiry: ${snapshot.data[index]['pro_phone']}',
-                                style: tileText,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   )
                 : Center(child: Text('Nothing to show'));
           }),

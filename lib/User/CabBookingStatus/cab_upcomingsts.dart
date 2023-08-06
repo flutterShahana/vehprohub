@@ -100,7 +100,7 @@ class _CabUpcomingStsState extends State<CabUpcomingSts> {
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['book_id']}',
+                            'Booking ID :# ${snapshot.data[index]['book_id']}',
                           ),
                           subtitle: ListView(
                             padding: EdgeInsets.all(15),
@@ -131,6 +131,16 @@ class _CabUpcomingStsState extends State<CabUpcomingSts> {
                                 style: tileText,
                               ),
                               Divider(),
+                              Text(
+                                'For Enquiry: ',
+                                style: tileText,
+                              ),
+                              ListTile(
+                                title: Text(
+                                  'Ph: ${snapshot.data[index]['pro_phone']}',
+                                  style: tileText,
+                                ),
+                              ),
                               Visibility(
                                 visible:
                                     snapshot.data[index]['pay_status'] == 'paid'

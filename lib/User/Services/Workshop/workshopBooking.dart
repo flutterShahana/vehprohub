@@ -244,7 +244,17 @@ class _WorkshopBookingState extends State<WorkshopBooking> {
                                     actions: [
                                       TextButton(
                                           onPressed: () {
-                                            sentData();
+                                            if (date.text.isNotEmpty &&
+                                                time.text.isNotEmpty) {
+                                              setState(() {
+                                                sentData();
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          'All fields required..')));
+                                            }
                                           },
                                           child: Text('Proceed')),
                                       TextButton(

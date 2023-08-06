@@ -7,6 +7,7 @@ import '../../User/WorkshopBookingStatus/bookSts_workshop.dart';
 import 'Accessories/pro_acc_bookings.dart';
 import 'Cab/pro_cab_bookings.dart';
 import 'Rentals/pro_rental_bookings.dart';
+import 'Workshop/pro_workshop_bookings.dart';
 
 class ProviderBookSts extends StatefulWidget {
   const ProviderBookSts({Key? key}) : super(key: key);
@@ -96,7 +97,7 @@ class _ProviderBookStsState extends State<ProviderBookSts> {
                       showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) =>
-                            const BookStatusWorkshop(),
+                            const ProviderBookStatusWorkshop(),
                       );
                     },
                     child: const Text(

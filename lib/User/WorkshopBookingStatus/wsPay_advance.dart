@@ -7,16 +7,16 @@ import 'package:http/http.dart';
 import '../../CONNECTION/connect.dart';
 import '../Services/Accessory/accessoriesService.dart';
 
-class AccessoryPay extends StatefulWidget {
-  AccessoryPay({Key? key, required this.bookingID, required this.amt})
+class WorkshopPay_Advance extends StatefulWidget {
+  WorkshopPay_Advance({Key? key, required this.bookingID, required this.amt})
       : super(key: key);
   var bookingID;
   var amt;
   @override
-  State<AccessoryPay> createState() => _AccessoryPayState();
+  State<WorkshopPay_Advance> createState() => _WorkshopPay_AdvanceState();
 }
 
-class _AccessoryPayState extends State<AccessoryPay> {
+class _WorkshopPay_AdvanceState extends State<WorkshopPay_Advance> {
   // List<String> items = ['Item 1', 'Item 2', 'Item 3'];
   var flag = 0;
   var status;
@@ -38,12 +38,15 @@ class _AccessoryPayState extends State<AccessoryPay> {
     var data = {
       'pay_type': selected_payType,
       'pay_method': _selectedPay,
-      'pay_status': selected_payType == 'Online' ? 'paid' : 'pay on delivery',
+      'pay_status':
+          selected_payType == 'Online' ? 'advance paid' : 'advance paid (Cash)',
       'booking_id': widget.bookingID,
+      'amt': widget.amt
     };
     print(data);
-    var response =
-        await post(Uri.parse('${Con.url}USER/Payment/accPay.php'), body: data);
+    var response = await post(
+        Uri.parse('${Con.url}USER/Payment/workshopPay.php'),
+        body: data);
     print(response.body);
     print(response.statusCode);
     status = response.statusCode;

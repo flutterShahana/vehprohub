@@ -133,136 +133,214 @@ class _AccessoryUpcomingStsState extends State<AccessoryUpcomingSts> {
               }
             }
             return flag == 1
-                ? ListView.builder(
-                    padding: EdgeInsets.all(15),
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 10,
-                        child: ListTile(
-                          title: Text(
-                            '# ${snapshot.data[index]['acc_book_id']}',
-                          ),
-                          subtitle: ListView(
-                            padding: EdgeInsets.all(15),
-                            shrinkWrap: true,
-                            children: [
-                              Text(
-                                'Accessory ID :# ${snapshot.data[index]['acc_id']}',
-                                style: tileTitle,
-                              ),
-                              Text(
-                                'Type : ${snapshot.data[index]['type']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Name: ${snapshot.data[index]['name']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Brand: ${snapshot.data[index]['brand']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Quantity: ${snapshot.data[index]['quantity']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Enquiry: ${snapshot.data[index]['pro_phone']}',
-                                style: tileText,
-                              ),
-                              Divider(),
-                              Text(
-                                'Total Amount: ₹ ${snapshot.data[index]['tot']}',
-                                style: tileText,
-                              ),
-                              Divider(),
-                              RichText(
-                                text: TextSpan(
-                                    text: ' Payment Status:  ',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.blue),
-                                    children: [
-                                      TextSpan(
-                                        text:
-                                            '${snapshot.data[index]['pay_status']}',
-                                        style: TextStyle(color: Colors.red),
-                                      )
-                                    ]),
-                              ),
-                              Divider(),
-                              Visibility(
-                                visible:
-                                    snapshot.data[index]['pay_status'] == 'paid'
-                                        ? false
-                                        : true,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: OutlinedButton(
-                                          onPressed: () {
-                                            booikingId = snapshot.data[index]
-                                                ['acc_book_id'];
-                                            print('Booking Id:$booikingId');
-                                            print(
-                                                'Accessory ID: ${snapshot.data[index]['acc_id'].toString()}');
-
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        AccessoryPay(
-                                                          bookingID: booikingId,
-                                                          amt: snapshot
-                                                                  .data[index]
-                                                              ['tot'],
-                                                        )));
-                                          },
-                                          child: Text('Pay to proceed')),
-                                    ),
-                                    Expanded(
-                                      child: OutlinedButton(
-                                          onPressed: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    content: Text(
-                                                        'Confirm Cancellation'),
-                                                    title: Text(
-                                                        'Do you want to cancel ..'),
-                                                    actions: [
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            booikingId = snapshot
-                                                                    .data[index]
-                                                                ['acc_book_id'];
-                                                            cancel();
-                                                          },
-                                                          child: Text('Yes')),
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: Text('No')),
-                                                    ],
-                                                  );
-                                                });
-                                          },
-                                          child: Text('Cancel')),
-                                    ),
-                                  ],
+                ? Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          elevation: 10,
+                          child: ListTile(
+                            title: Text(
+                              'Booking ID :# ${snapshot.data[index]['acc_book_id']}',
+                            ),
+                            subtitle: ListView(
+                              padding: EdgeInsets.all(15),
+                              shrinkWrap: true,
+                              children: [
+                                Text(
+                                  'Accessory ID :# ${snapshot.data[index]['acc_id']}',
+                                  style: tileTitle,
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  'Type : ${snapshot.data[index]['type']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Name: ${snapshot.data[index]['name']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Brand: ${snapshot.data[index]['brand']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Quantity: ${snapshot.data[index]['quantity']}',
+                                  style: tileText,
+                                ),
+                                Divider(),
+                                Text(
+                                  'Total Amount: ₹ ${snapshot.data[index]['tot']}',
+                                  style: tileText,
+                                ),
+                                Divider(),
+                                RichText(
+                                  text: TextSpan(
+                                      text: ' Payment Status:  ',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue),
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              '${snapshot.data[index]['pay_status']}',
+                                          style: TextStyle(color: Colors.red),
+                                        )
+                                      ]),
+                                ),
+                                Divider(),
+                                Text(
+                                  'For Enquiry: ',
+                                  style: tileText,
+                                ),
+                                ListTile(
+                                  title: Text(
+                                    'Ph: ${snapshot.data[index]['pro_phone']}',
+                                    style: tileText,
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: snapshot.data[index]['pay_status'] ==
+                                              'paid' ||
+                                          snapshot.data[index]['pay_status'] ==
+                                              'pay on delivery'
+                                      ? false
+                                      : true,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: OutlinedButton(
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    var total_amt = int.parse(
+                                                        snapshot.data[index]
+                                                            ['rate']);
+                                                    var qnty = int.parse(
+                                                        snapshot.data[index]
+                                                            ['quantity']);
+                                                    var toPay =
+                                                        total_amt * qnty;
+                                                    print(toPay);
+                                                    return AlertDialog(
+                                                      title: Container(
+                                                        height: 300,
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                    'Total Amount:'),
+                                                                Text(
+                                                                    '₹ ${snapshot.data[index]['rate']}')
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text(
+                                                                    'Quantity :'),
+                                                                Text(
+                                                                    '${snapshot.data[index]['quantity']} No.')
+                                                              ],
+                                                            ),
+                                                            Divider(),
+                                                            Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Text('Total :'),
+                                                                Text('₹ $toPay')
+                                                              ],
+                                                            ),
+                                                            OutlinedButton(
+                                                                onPressed: () {
+                                                                  booikingId = snapshot
+                                                                              .data[
+                                                                          index]
+                                                                      [
+                                                                      'acc_book_id'];
+                                                                  print(
+                                                                      'Booking Id:$booikingId');
+                                                                  print(
+                                                                      'Accessory ID: ${snapshot.data[index]['acc_id'].toString()}');
+                                                                  Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) => AccessoryPay(
+                                                                                bookingID: booikingId,
+                                                                                amt: toPay.toString(),
+                                                                              )));
+                                                                },
+                                                                child: Text(
+                                                                    'Pay')),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                            child: Text('Pay to proceed')),
+                                      ),
+                                      Expanded(
+                                        child: OutlinedButton(
+                                            onPressed: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      content: Text(
+                                                          'Confirm Cancellation'),
+                                                      title: Text(
+                                                          'Do you want to cancel ..'),
+                                                      actions: [
+                                                        TextButton(
+                                                            onPressed: () {
+                                                              booikingId = snapshot
+                                                                          .data[
+                                                                      index][
+                                                                  'acc_book_id'];
+                                                              setState(() {
+                                                                cancel();
+                                                              });
+                                                            },
+                                                            child: Text('Yes')),
+                                                        TextButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: Text('No')),
+                                                      ],
+                                                    );
+                                                  });
+                                            },
+                                            child: Text('Cancel')),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   )
                 : Center(child: Text('Nothing to show'));
           }),

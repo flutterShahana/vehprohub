@@ -68,9 +68,10 @@ class _CabCompletedStsState extends State<CabCompletedSts> {
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['book_id']}',
+                            'Booking ID :# ${snapshot.data[index]['book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(
@@ -96,6 +97,17 @@ class _CabCompletedStsState extends State<CabCompletedSts> {
                               Text(
                                 'Time: ${snapshot.data[index]['bookingTime']}',
                                 style: tileText,
+                              ),
+                              Divider(),
+                              Text(
+                                'For Enquiry: ',
+                                style: tileText,
+                              ),
+                              ListTile(
+                                title: Text(
+                                  'Ph: ${snapshot.data[index]['pro_phone']}',
+                                  style: tileText,
+                                ),
                               ),
                             ],
                           ),

@@ -7,19 +7,19 @@ import 'package:http/http.dart';
 import '../../CONNECTION/connect.dart';
 import '../../SP/sp.dart';
 
-class WorkshopRequestSts extends StatefulWidget {
-  const WorkshopRequestSts({Key? key}) : super(key: key);
+class WorkshopCancelledSts extends StatefulWidget {
+  const WorkshopCancelledSts({Key? key}) : super(key: key);
 
   @override
-  State<WorkshopRequestSts> createState() => _WorkshopRequestStsState();
+  State<WorkshopCancelledSts> createState() => _WorkshopCancelledStsState();
 }
 
-class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
+class _WorkshopCancelledStsState extends State<WorkshopCancelledSts> {
   // List<String> items = ['Item 1', 'Item 2', 'Item 3'];
   var flag = 0;
   var status;
   Future<dynamic> getData() async {
-    var data = {'user_id': lid.toString(), 'req_status': 'requested'};
+    var data = {'user_id': lid.toString(), 'req_status': 'cancelled'};
     var response = await post(
         Uri.parse('${Con.url}USER/BOOKINGS/viewMyWorkshopBooking.php'),
         body: data);
@@ -70,7 +70,7 @@ class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
                           elevation: 10,
                           child: ListTile(
                             title: Text(
-                              'Booking ID :# ${snapshot.data[index]['work_book_id']}',
+                              'Booking ID:# ${snapshot.data[index]['work_book_id']}',
                             ),
                             subtitle: ListView(
                               padding: EdgeInsets.all(15),
@@ -100,6 +100,7 @@ class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
                                   'Requested Time:# ${snapshot.data[index]['booking_time']}',
                                   style: tileText,
                                 ),
+                                Divider(),
                                 Text(
                                   'Total Amount: ₹ ${snapshot.data[index]['amount']}',
                                   style: tileText,

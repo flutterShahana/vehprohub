@@ -135,6 +135,25 @@ class _ProviderCabUpcomingStsState extends State<ProviderCabUpcomingSts> {
                                 'Payment Status: ${snapshot.data[index]['pay_status']}',
                                 style: tileText,
                               ),
+                              Divider(),
+                              Text(
+                                'For Enquiry: ',
+                                style: tileText,
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                title: Text(
+                                  'Customer: ${snapshot.data[index]['username']}',
+                                  style: tileText,
+                                ),
+                                subtitle: Text(
+                                  'Ph: ${snapshot.data[index]['phone']}',
+                                  style: tileText,
+                                ),
+                              ),
                               Visibility(
                                 visible:
                                     int.parse(snapshot.data[index]['tot_hr']) ==

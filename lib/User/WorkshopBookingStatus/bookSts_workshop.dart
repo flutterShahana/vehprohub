@@ -2,6 +2,7 @@ import 'package:autoprohub/User/RentalBookingStatus/rentalrequeststs.dart';
 import 'package:autoprohub/User/RentalBookingStatus/rentalcompletedsts.dart';
 import 'package:autoprohub/User/BOOKINGSTATUS/rentalunsuccesfulsts.dart';
 import 'package:autoprohub/User/RentalBookingStatus/rentalupcomingsts.dart';
+import 'package:autoprohub/User/WorkshopBookingStatus/workshopCancelledsts.dart';
 import 'package:autoprohub/User/WorkshopBookingStatus/workshopRequeststs.dart';
 import 'package:autoprohub/User/WorkshopBookingStatus/workshopUpcomingsts.dart';
 import 'package:autoprohub/User/WorkshopBookingStatus/workshopcompletedsts.dart';
@@ -18,7 +19,7 @@ class _BookStatusWorkshopState extends State<BookStatusWorkshop> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         //
         // appBar: AppBar(
@@ -50,6 +51,7 @@ class _BookStatusWorkshopState extends State<BookStatusWorkshop> {
                   Tab(text: "Upcoming"),
                   Tab(text: "Requested"),
                   Tab(text: "Completed"),
+                  Tab(text: "Cancelled"),
                 ],
                 isScrollable: true,
               ),
@@ -60,6 +62,7 @@ class _BookStatusWorkshopState extends State<BookStatusWorkshop> {
                   WorkshopUpcomingSts(),
                   WorkshopRequestSts(),
                   WorkshopCompletedSts(),
+                  WorkshopCancelledSts()
                 ],
               ),
             ),

@@ -1,28 +1,33 @@
 import 'dart:convert';
 
 import 'package:autoprohub/Style/styles.dart';
+import 'package:autoprohub/User/WorkshopBookingStatus/wsPay.dart';
+import 'package:autoprohub/User/WorkshopBookingStatus/wsPay_advance.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-import '../../CONNECTION/connect.dart';
-import '../../SP/sp.dart';
+import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
-class WorkshopRequestSts extends StatefulWidget {
-  const WorkshopRequestSts({Key? key}) : super(key: key);
+class ProviderWorkshopCompletedSts extends StatefulWidget {
+  const ProviderWorkshopCompletedSts({Key? key}) : super(key: key);
 
   @override
-  State<WorkshopRequestSts> createState() => _WorkshopRequestStsState();
+  State<ProviderWorkshopCompletedSts> createState() =>
+      _ProviderWorkshopCompletedStsState();
 }
 
-class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
+class _ProviderWorkshopCompletedStsState
+    extends State<ProviderWorkshopCompletedSts> {
   // List<String> items = ['Item 1', 'Item 2', 'Item 3'];
   var flag = 0;
-  var status;
+  var reply;
+
+  var status, advance, booikingId, balance;
   Future<dynamic> getData() async {
-    var data = {'user_id': lid.toString(), 'req_status': 'requested'};
-    var response = await post(
-        Uri.parse('${Con.url}USER/BOOKINGS/viewMyWorkshopBooking.php'),
-        body: data);
+    var data = {'pro_id': lid.toString(), 'req_status': 'completed'};
+    var response =
+        await post(Uri.parse('${Con.url}viewWorkshopBookings.php'), body: data);
     print(response.body);
     print(response.statusCode);
     status = response.statusCode;
@@ -100,9 +105,25 @@ class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
                                   'Requested Time:# ${snapshot.data[index]['booking_time']}',
                                   style: tileText,
                                 ),
+                                Divider(),
                                 Text(
                                   'Total Amount: ₹ ${snapshot.data[index]['amount']}',
                                   style: tileText,
+                                ),
+                                Divider(),
+                                RichText(
+                                  text: TextSpan(
+                                      text: ' Payment Status:  ',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.blue),
+                                      children: [
+                                        TextSpan(
+                                          text:
+                                              '${snapshot.data[index]['pay_status']}',
+                                          style: TextStyle(color: Colors.red),
+                                        )
+                                      ]),
                                 ),
                                 Divider(),
                                 Text(
@@ -110,8 +131,16 @@ class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
                                   style: tileText,
                                 ),
                                 ListTile(
+                                  leading: Container(
+                                    height: 30,
+                                    width: 30,
+                                  ),
                                   title: Text(
-                                    'Ph: ${snapshot.data[index]['pro_phone']}',
+                                    'Customer: ${snapshot.data[index]['username']}',
+                                    style: tileText,
+                                  ),
+                                  subtitle: Text(
+                                    'Ph: ${snapshot.data[index]['phone']}',
                                     style: tileText,
                                   ),
                                 ),

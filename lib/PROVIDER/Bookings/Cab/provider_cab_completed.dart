@@ -97,6 +97,25 @@ class _ProviderCabCompletedStsState extends State<ProviderCabCompletedSts> {
                                 'Time: ${snapshot.data[index]['bookingTime']}',
                                 style: tileText,
                               ),
+                              Divider(),
+                              Text(
+                                'Customer: ',
+                                style: tileText,
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                title: Text(
+                                  '${snapshot.data[index]['username']}',
+                                  style: tileText,
+                                ),
+                                subtitle: Text(
+                                  'Ph: ${snapshot.data[index]['phone']}',
+                                  style: tileText,
+                                ),
+                              ),
                             ],
                           ),
                         ),

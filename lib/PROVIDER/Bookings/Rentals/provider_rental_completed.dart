@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
 class ProviderRentalCompletedSts extends StatefulWidget {
   const ProviderRentalCompletedSts({Key? key}) : super(key: key);
@@ -19,8 +20,9 @@ class _ProviderRentalCompletedStsState
   // List<String> items = ['Item 1', 'Item 2', 'Item 3'];
   var flag = 0;
   var status;
+  var lid;
   Future<dynamic> getData() async {
-    var data = {'pro_id': '2', 'req_status': 'completed'};
+    var data = {'pro_id': lid.toString(), 'req_status': 'completed'};
     var response =
         await post(Uri.parse('${Con.url}viewRentalBookings.php'), body: data);
     print(response.body);
@@ -33,6 +35,13 @@ class _ProviderRentalCompletedStsState
 
   @override
   void initState() {
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print(lid);
+      });
+    });
     getData();
   }
 
@@ -59,9 +68,10 @@ class _ProviderRentalCompletedStsState
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['rent_book_id']}',
+                            'Booking ID:# ${snapshot.data[index]['rent_book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(

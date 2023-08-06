@@ -61,51 +61,62 @@ class _RentalCompletedStsState extends State<RentalCompletedSts> {
               }
             }
             return flag == 1
-                ? ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 10,
-                        child: ListTile(
-                          title: Text(
-                            '# ${snapshot.data[index]['rent_book_id']}',
+                ? Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          elevation: 10,
+                          child: ListTile(
+                            title: Text(
+                              'Booking ID :# ${snapshot.data[index]['rent_book_id']}',
+                            ),
+                            subtitle: ListView(
+                              padding: EdgeInsets.all(15),
+                              shrinkWrap: true,
+                              children: [
+                                Text(
+                                  'Rental ID :# ${snapshot.data[index]['rental_id']}',
+                                  style: tileTitle,
+                                ),
+                                Text(
+                                  'Type : ${snapshot.data[index]['type']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Days: ${snapshot.data[index]['days']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Pick Up Date: ${snapshot.data[index]['pick_up_date']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Pick Up Time: ${snapshot.data[index]['pick_up_time']}',
+                                  style: tileText,
+                                ),
+                                Text(
+                                  'Rate:# ${snapshot.data[index]['rate']}',
+                                  style: tileText,
+                                ),
+                                Divider(),
+                                Text(
+                                  'For Enquiry: ',
+                                  style: tileText,
+                                ),
+                                ListTile(
+                                  title: Text(
+                                    'Ph: ${snapshot.data[index]['pro_phone']}',
+                                    style: tileText,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          subtitle: ListView(
-                            shrinkWrap: true,
-                            children: [
-                              Text(
-                                'Rental ID :# ${snapshot.data[index]['rental_id']}',
-                                style: tileTitle,
-                              ),
-                              Text(
-                                'Type : ${snapshot.data[index]['type']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Days: ${snapshot.data[index]['days']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Pick Up Date: ${snapshot.data[index]['pick_up_date']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Pick Up Time: ${snapshot.data[index]['pick_up_time']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Rate:# ${snapshot.data[index]['rate']}',
-                                style: tileText,
-                              ),
-                              Text(
-                                'Enquiry: ${snapshot.data[index]['pro_phone']}',
-                                style: tileText,
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   )
                 : Center(child: Text('Nothing to show'));
           }),

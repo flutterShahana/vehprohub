@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
 class ProviderAccessoryUpcomingSts extends StatefulWidget {
   const ProviderAccessoryUpcomingSts({Key? key}) : super(key: key);
@@ -22,7 +23,8 @@ class _ProviderAccessoryUpcomingStsState
   var booikingId;
   var reply;
   Future<dynamic> getData() async {
-    var data = {'pro_id': '1', 'req_status': 'accepted'};
+    var data = {'pro_id': lid.toString(), 'req_status': 'accepted'};
+    print(data);
     var response =
         await post(Uri.parse('${Con.url}viewAccBookings.php'), body: data);
     print(response.body);
@@ -46,8 +48,16 @@ class _ProviderAccessoryUpcomingStsState
     return json.decode(response.body);
   }
 
+  var lid;
   @override
   void initState() {
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print(lid);
+      });
+    });
     getData();
   }
 
@@ -74,9 +84,10 @@ class _ProviderAccessoryUpcomingStsState
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['acc_book_id']}',
+                            'Booking ID: # ${snapshot.data[index]['acc_book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(
@@ -104,31 +115,58 @@ class _ProviderAccessoryUpcomingStsState
                                 style: tileText,
                               ),
                               Text(
-                                'Enquiry: ${snapshot.data[index]['pro_phone']}',
+                                'Payment Status: ${snapshot.data[index]['pay_status']}',
                                 style: tileText,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Expanded(
-                                    child: OutlinedButton(
-                                        onPressed: () {
-                                          booikingId = snapshot.data[index]
-                                              ['acc_book_id'];
-                                          print('Booking Id:$booikingId');
-                                          print(
-                                              'Accessory ID: ${snapshot.data[index]['acc_id'].toString()}');
+                              Divider(),
+                              Text(
+                                'For Enquiry: ',
+                                style: tileText,
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                title: Text(
+                                  'Customer: ${snapshot.data[index]['username']}',
+                                  style: tileText,
+                                ),
+                                subtitle: Text(
+                                  'Ph: ${snapshot.data[index]['phone']}',
+                                  style: tileText,
+                                ),
+                              ),
+                              Visibility(
+                                visible: snapshot.data[index]['pay_status'] ==
+                                            'paid' ||
+                                        snapshot.data[index]['pay_status'] ==
+                                            'pay on delivery'
+                                    ? true
+                                    : false,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: OutlinedButton(
+                                          onPressed: () {
+                                            booikingId = snapshot.data[index]
+                                                ['acc_book_id'];
+                                            print('Booking Id:$booikingId');
+                                            print(
+                                                'Accessory ID: ${snapshot.data[index]['acc_id'].toString()}');
 
-                                          reply = 'completed';
+                                            reply = 'completed';
 
-                                          setState(() {
-                                            updateRequest();
-                                          });
-                                        },
-                                        child: Text('Mark completed')),
-                                  ),
-                                ],
+                                            setState(() {
+                                              updateRequest();
+                                            });
+                                          },
+                                          child: Text('Mark completed')),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

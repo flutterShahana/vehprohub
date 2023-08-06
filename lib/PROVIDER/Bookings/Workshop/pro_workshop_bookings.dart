@@ -1,22 +1,29 @@
-import 'package:autoprohub/User/RentalBookingStatus/rental_request_cancelled.dart';
+import 'package:autoprohub/PROVIDER/Bookings/Rentals/provider_rental_completed.dart';
+import 'package:autoprohub/PROVIDER/Bookings/Rentals/provider_rental_requests.dart';
+import 'package:autoprohub/PROVIDER/Bookings/Rentals/provider_rental_upcomingSts.dart';
+import 'package:autoprohub/PROVIDER/Bookings/Workshop/provide_workshop_completedSts.dart';
+import 'package:autoprohub/PROVIDER/Bookings/Workshop/provide_workshop_requestedSts.dart';
+import 'package:autoprohub/PROVIDER/Bookings/Workshop/provide_workshop_upcomingSts.dart';
 import 'package:autoprohub/User/RentalBookingStatus/rentalrequeststs.dart';
 import 'package:autoprohub/User/RentalBookingStatus/rentalcompletedsts.dart';
 import 'package:autoprohub/User/BOOKINGSTATUS/rentalunsuccesfulsts.dart';
 import 'package:autoprohub/User/RentalBookingStatus/rentalupcomingsts.dart';
 import 'package:flutter/material.dart';
 
-class BookStatusRental extends StatefulWidget {
-  const BookStatusRental({Key? key}) : super(key: key);
+class ProviderBookStatusWorkshop extends StatefulWidget {
+  const ProviderBookStatusWorkshop({Key? key}) : super(key: key);
 
   @override
-  State<BookStatusRental> createState() => _BookStatusRentalState();
+  State<ProviderBookStatusWorkshop> createState() =>
+      _ProviderBookStatusWorkshopState();
 }
 
-class _BookStatusRentalState extends State<BookStatusRental> {
+class _ProviderBookStatusWorkshopState
+    extends State<ProviderBookStatusWorkshop> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         //
         // appBar: AppBar(
@@ -45,10 +52,9 @@ class _BookStatusRentalState extends State<BookStatusRental> {
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.black,
                 tabs: const [
-                  Tab(text: "Upcoming"),
-                  Tab(text: "Requested"),
-                  Tab(text: "Completed"),
-                  Tab(text: "Cancelled"),
+                  Tab(text: "\t\t\t\t\tUpcoming\t\t\t\t\t"),
+                  Tab(text: "\t\t\t\t\tRequests\t\t\t\t\t"),
+                  Tab(text: "\t\t\t\t\tCompleted\t\t\t\t\t"),
                 ],
                 isScrollable: true,
               ),
@@ -56,10 +62,9 @@ class _BookStatusRentalState extends State<BookStatusRental> {
             Expanded(
               child: TabBarView(
                 children: [
-                  RentalUpcomingSts(),
-                  RentalRequestSts(),
-                  RentalCompletedSts(),
-                  RentalRequestCancelled()
+                  ProviderWorkshopUpcomingSts(),
+                  ProviderWorkshopRequestedSts(),
+                  ProviderWorkshopCompletedSts(),
                 ],
               ),
             ),

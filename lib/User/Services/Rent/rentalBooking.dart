@@ -237,9 +237,18 @@ class _RentalBookingState extends State<RentalBooking> {
                                     actions: [
                                       TextButton(
                                           onPressed: () {
-                                            setState(() {
-                                              sentData();
-                                            });
+                                            if (days.text.isNotEmpty &&
+                                                pickDate.text.isNotEmpty &&
+                                                pickTime.text.isNotEmpty) {
+                                              setState(() {
+                                                sentData();
+                                              });
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          'All Fields required..')));
+                                            }
                                           },
                                           child: Text('Ok')),
                                       TextButton(

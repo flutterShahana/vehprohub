@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
 class ProviderRentalRequestSts extends StatefulWidget {
   const ProviderRentalRequestSts({Key? key}) : super(key: key);
@@ -20,8 +21,9 @@ class _ProviderRentalRequestStsState extends State<ProviderRentalRequestSts> {
   var status;
   var booikingId;
   var reply;
+  var lid;
   Future<dynamic> getData() async {
-    var data = {'pro_id': '2', 'req_status': 'requested'};
+    var data = {'pro_id': lid.toString(), 'req_status': 'requested'};
     var response =
         await post(Uri.parse('${Con.url}viewRentalBookings.php'), body: data);
     print(response.body);
@@ -47,6 +49,13 @@ class _ProviderRentalRequestStsState extends State<ProviderRentalRequestSts> {
 
   @override
   void initState() {
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print(lid);
+      });
+    });
     getData();
   }
 
@@ -73,9 +82,10 @@ class _ProviderRentalRequestStsState extends State<ProviderRentalRequestSts> {
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['rent_book_id']}',
+                            'Booking :# ${snapshot.data[index]['rent_book_id']}',
                           ),
                           subtitle: ListView(
+                            padding: EdgeInsets.all(15),
                             shrinkWrap: true,
                             children: [
                               Text(
@@ -102,9 +112,24 @@ class _ProviderRentalRequestStsState extends State<ProviderRentalRequestSts> {
                                 'Rent:# ${snapshot.data[index]['rent']}/day',
                                 style: tileText,
                               ),
+                              Divider(),
                               Text(
-                                'Enquiry: ${snapshot.data[index]['phone']}',
+                                'For Enquiry: ',
                                 style: tileText,
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                title: Text(
+                                  'Customer: ${snapshot.data[index]['username']}',
+                                  style: tileText,
+                                ),
+                                subtitle: Text(
+                                  'Ph: ${snapshot.data[index]['phone']}',
+                                  style: tileText,
+                                ),
                               ),
                               Row(
                                 mainAxisAlignment:

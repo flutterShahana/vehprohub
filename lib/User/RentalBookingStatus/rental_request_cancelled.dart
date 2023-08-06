@@ -7,21 +7,21 @@ import 'package:http/http.dart';
 import '../../CONNECTION/connect.dart';
 import '../../SP/sp.dart';
 
-class WorkshopRequestSts extends StatefulWidget {
-  const WorkshopRequestSts({Key? key}) : super(key: key);
+class RentalRequestCancelled extends StatefulWidget {
+  const RentalRequestCancelled({Key? key}) : super(key: key);
 
   @override
-  State<WorkshopRequestSts> createState() => _WorkshopRequestStsState();
+  State<RentalRequestCancelled> createState() => _RentalRequestCancelledState();
 }
 
-class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
+class _RentalRequestCancelledState extends State<RentalRequestCancelled> {
   // List<String> items = ['Item 1', 'Item 2', 'Item 3'];
   var flag = 0;
   var status;
   Future<dynamic> getData() async {
-    var data = {'user_id': lid.toString(), 'req_status': 'requested'};
+    var data = {'user_id': lid.toString(), 'req_status': 'cancelled'};
     var response = await post(
-        Uri.parse('${Con.url}USER/BOOKINGS/viewMyWorkshopBooking.php'),
+        Uri.parse('${Con.url}USER/BOOKINGS/viewMyRentalBooking.php'),
         body: data);
     print(response.body);
     print(response.statusCode);
@@ -70,14 +70,14 @@ class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
                           elevation: 10,
                           child: ListTile(
                             title: Text(
-                              'Booking ID :# ${snapshot.data[index]['work_book_id']}',
+                              'Booking ID :# ${snapshot.data[index]['book_id']}',
                             ),
                             subtitle: ListView(
                               padding: EdgeInsets.all(15),
                               shrinkWrap: true,
                               children: [
                                 Text(
-                                  'Workshop Service ID :# ${snapshot.data[index]['work_id']}',
+                                  'Cab ID :# ${snapshot.data[index]['cab_id']}',
                                   style: tileTitle,
                                 ),
                                 Text(
@@ -85,23 +85,19 @@ class _WorkshopRequestStsState extends State<WorkshopRequestSts> {
                                   style: tileText,
                                 ),
                                 Text(
-                                  'Service: ${snapshot.data[index]['serviceName']}',
+                                  'Source: ${snapshot.data[index]['source']}',
                                   style: tileText,
                                 ),
                                 Text(
-                                  'Average time: ${snapshot.data[index]['avgTime']}',
+                                  'Destination: ${snapshot.data[index]['dest']}',
                                   style: tileText,
                                 ),
                                 Text(
-                                  'Booking For: ${snapshot.data[index]['booking_date']}',
+                                  'Date:# ${snapshot.data[index]['bookingDate']}',
                                   style: tileText,
                                 ),
                                 Text(
-                                  'Requested Time:# ${snapshot.data[index]['booking_time']}',
-                                  style: tileText,
-                                ),
-                                Text(
-                                  'Total Amount: ₹ ${snapshot.data[index]['amount']}',
+                                  'Time: ${snapshot.data[index]['bookingTime']}',
                                   style: tileText,
                                 ),
                                 Divider(),

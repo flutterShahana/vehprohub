@@ -228,7 +228,14 @@ class _CabBookingState extends State<CabBooking> {
                                     actions: [
                                       TextButton(
                                           onPressed: () {
-                                            sentData();
+                                            if(source.text.isNotEmpty && dest.text.isNotEmpty && date.text.isNotEmpty && time.text.isNotEmpty){
+                                              sentData();
+                                            }
+                                            else{
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text('All Fields required')));
+
+                                            }
+
                                           },
                                           child: Text('Proceed')),
                                       TextButton(

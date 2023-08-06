@@ -21,7 +21,7 @@ class _EditProfileState extends State<EditProfile> {
   var email = TextEditingController();
   var phone = TextEditingController();
   var password = TextEditingController();
-
+  var _formKey = GlobalKey<FormState>();
   Future<void> _refresh() async {
     // Simulate a delay for fetching new data
     await Future.delayed(Duration(seconds: 2));
@@ -88,6 +88,7 @@ class _EditProfileState extends State<EditProfile> {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Profile updated successfully..')));
       Navigator.pop(context);
+
       // Navigator.pushReplacement(
       //     context, MaterialPageRoute(builder: (context) => ViewRatings()));
     } else {
@@ -114,50 +115,92 @@ class _EditProfileState extends State<EditProfile> {
       //  body: Container(),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: ListView(
-          children: [
-            const SizedBox(height: 40),
-            Text(
-              'Edit Profile',
-              style: TextStyle(
-                  //  backgroundColor: Colors.purple,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.purple),
-            ),
-            const SizedBox(height: 40),
-            itemProfile(name, 'Name', CupertinoIcons.person),
-            const SizedBox(height: 10),
-            itemProfile(phone, 'Phone', CupertinoIcons.phone),
-            const SizedBox(height: 10),
-            itemProfile(email, 'Email', CupertinoIcons.mail),
-            const SizedBox(height: 10),
-            itemProfile(password, 'Password', CupertinoIcons.lock),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              // width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    updateProfile();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(15),
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.purple),
-                  child: const Text(
-                    'Update',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  )),
-            )
-          ],
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              const SizedBox(height: 40),
+              Text(
+                'Edit Profile',
+                style: TextStyle(
+                    //  backgroundColor: Colors.purple,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.purple),
+              ),
+              const SizedBox(height: 40),
+              itemProfile(
+                name,
+                'Name',
+                CupertinoIcons.person,
+                'Name is required.',
+                null,
+              ),
+              const SizedBox(height: 10),
+              itemProfile(
+                phone,
+                'Phone',
+                CupertinoIcons.phone,
+                'Phone number is required.',
+                null,
+              ),
+              const SizedBox(height: 10),
+              itemProfile(
+                email,
+                'Email',
+                CupertinoIcons.mail,
+                'Email is required.',
+                null,
+              ),
+              const SizedBox(height: 10),
+              itemProfile(
+                password,
+                'Password',
+                CupertinoIcons.lock,
+                'Password is required.',
+                null,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                // width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          updateProfile();
+                        });
+                      }
+                      // else {
+                      //   ScaffoldMessenger.of(context).showSnackBar(
+                      //       SnackBar(content: Text('All fields required')));
+                      // }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(15),
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.purple),
+                    child: const Text(
+                      'Update',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    )),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  itemProfile(TextEditingController ctrl, String? lbl, IconData iconData) {
+  itemProfile(
+    TextEditingController ctrl,
+    String? lbl,
+    IconData iconData,
+    String labelError,
+    String? Function(String?)? customValidator,
+  ) {
     return Container(
       decoration: BoxDecoration(
           color: Colors.white,
@@ -178,6 +221,24 @@ class _EditProfileState extends State<EditProfile> {
             label: Text('$lbl'),
             border: InputBorder.none,
           ),
+          validator: (value) {
+            if (customValidator != null) {
+              return customValidator(value);
+            } else {
+              if (value == null || value.isEmpty) {
+                return labelError;
+              }
+            }
+
+            // Additional validations based on field label
+            if (lbl == 'Phone' && value!.length != 10) {
+              return 'Phone number should be 10 digits.';
+            } else if (lbl == 'Password' && value!.length < 6) {
+              return 'Password should be at least 6 characters.';
+            }
+
+            return null;
+          },
         ),
 
         leading: Icon(iconData),

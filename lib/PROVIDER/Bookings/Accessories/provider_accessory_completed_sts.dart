@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 import '../../../CONNECTION/connect.dart';
+import '../../../SP/sp.dart';
 
 class ProviderAccessoryCompletedSts extends StatefulWidget {
   const ProviderAccessoryCompletedSts({Key? key}) : super(key: key);
@@ -19,11 +20,12 @@ class _ProviderAccessoryCompletedStsState
   // List<String> items = ['Item 1', 'Item 2', 'Item 3'];
   var flag = 0;
   var status;
+  var lid;
   Future<dynamic> getData() async {
-    var data = {'user_id': '6', 'req_status': 'completed'};
-    var response = await post(
-        Uri.parse('${Con.url}USER/BOOKINGS/viewMyAccBooking.php'),
-        body: data);
+    var data = {'pro_id': lid.toString(), 'req_status': 'completed'};
+    print(data);
+    var response =
+        await post(Uri.parse('${Con.url}viewAccBookings.php'), body: data);
     print(response.body);
     print(response.statusCode);
     status = response.statusCode;
@@ -34,6 +36,13 @@ class _ProviderAccessoryCompletedStsState
 
   @override
   void initState() {
+    SharedPreferencesHelper.getSavedData().then((value) {
+      setState(() {
+        lid = value;
+
+        print(lid);
+      });
+    });
     getData();
   }
 
@@ -60,10 +69,11 @@ class _ProviderAccessoryCompletedStsState
                         elevation: 10,
                         child: ListTile(
                           title: Text(
-                            '# ${snapshot.data[index]['acc_book_id']}',
+                            'Booking ID :# ${snapshot.data[index]['acc_book_id']}',
                           ),
                           subtitle: ListView(
                             shrinkWrap: true,
+                            padding: EdgeInsets.all(15),
                             children: [
                               Text(
                                 'Accessory ID :# ${snapshot.data[index]['acc_id']}',
@@ -89,9 +99,24 @@ class _ProviderAccessoryCompletedStsState
                                 'Rate:# ${snapshot.data[index]['rate']}',
                                 style: tileText,
                               ),
+                              Divider(),
                               Text(
-                                'Enquiry: ${snapshot.data[index]['pro_phone']}',
+                                'Customer: ',
                                 style: tileText,
+                              ),
+                              ListTile(
+                                leading: Container(
+                                  height: 30,
+                                  width: 30,
+                                ),
+                                title: Text(
+                                  '${snapshot.data[index]['username']}',
+                                  style: tileText,
+                                ),
+                                subtitle: Text(
+                                  'Ph: ${snapshot.data[index]['phone']}',
+                                  style: tileText,
+                                ),
                               ),
                             ],
                           ),
